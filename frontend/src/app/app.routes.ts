@@ -4,31 +4,22 @@ import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { SupplierComponent } from './component/supplier/supplier.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { AuthComponent } from './pages/auth/auth.component';
+import { StockComponent } from './component/stock/stock.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 export const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
     component: HomeComponent,
+    children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'dashboard', component: DashboardComponent, title: 'Dashboard' },
+      { path: 'add_stock', component: StockComponent, title: 'Create Stock' },
+      { path: 'supplier', component: SupplierComponent, title: 'Suppliers' },
+      { path: 'profile', component: ProfileComponent, title: 'Profile' },
+    ],
   },
-  {
-    path: '',
-    component: HomeComponent,
-  },
-  {
-    path: 'dashboard',
-    component: DashboardComponent,
-  },
-  {
-    path: 'supplier',
-    component: SupplierComponent,
-  },
-  {
-    path: 'profile',
-    component: ProfileComponent,
-  },
-  {
-    path: 'auth',
-    component: AuthComponent,
-  },
+  { path: 'auth', component: AuthComponent },
+  { path: 'no_found', component: NotFoundComponent },
+  { path: '**', redirectTo: 'no_found' },
 ];

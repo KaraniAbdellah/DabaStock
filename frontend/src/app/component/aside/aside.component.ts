@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import {RouterModule} from "@angular/router";
 
 @Component({
   selector: 'app-aside',
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './aside.component.html',
   styleUrl: './aside.component.css'
 })

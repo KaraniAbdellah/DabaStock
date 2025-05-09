@@ -1,15 +1,11 @@
 import { Component } from '@angular/core';
-import { RouterOutlet, RouterModule } from '@angular/router';
-import { AsideComponent } from './component/aside/aside.component';
-import { HeaderComponent } from './component/header/header.component';
-
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterModule, RouterOutlet, HeaderComponent, AsideComponent],
+  imports: [RouterModule],
   templateUrl: './app.component.html',
 })
 export class AppComponent {
   title = 'DabaStock';
 }
-

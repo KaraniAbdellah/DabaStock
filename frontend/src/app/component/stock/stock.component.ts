@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-auth',
+  selector: 'app-stock',
   imports: [RouterModule],
-  templateUrl: './auth.component.html',
-  styleUrl: './auth.component.css'
+  templateUrl: './stock.component.html',
+  styleUrl: './stock.component.css'
 })
-export class AuthComponent {
+export class StockComponent {
   
 }
