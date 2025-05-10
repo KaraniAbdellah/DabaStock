@@ -1,34 +1,27 @@
-<header
-  class="bg-zinc-900 w-full shadow-md px-6 py-4 flex justify-between items-center shadow-"
->
+<header class="bg-zinc-900 w-full shadow-lg px-6 py-3 flex justify-between items-center border-b border-zinc-800">
   <div class="flex items-center">
-    <span class="text-2xl font-bold text-yellow-400">DabaStock</span>
+    <span class="text-2xl font-bold text-yellow-400 tracking-tight">DabaStock</span>
   </div>
 
-  <div class="relative">
-    <button
-      (click)="set_show_model()"
-      class="bg-zinc-800 hover:bg-zinc-700 text-yellow-400 font-semibold cursor-pointer rounded-lg px-4 py-2 flex items-center space-x-2"
+  <div class="relative dropdown-container">
+    <button 
+      (click)="toggleDropdown($event)"
+      class="dropdown-toggle bg-zinc-800 hover:bg-zinc-700 text-yellow-400 font-semibold cursor-pointer rounded-lg px-4 py-2 flex items-center space-x-2 transition-colors duration-200"
     >
-      <span>Hi, Ahmed</span>
-      <mat-icon>arrow_drop_down</mat-icon>
+      <span>Hi, {{ username() }}</span>
+      <mat-icon [class.rotate-180]="showDropdown()">expand_more</mat-icon>
     </button>
 
-    <div *ngIf="show_model()">
-      <ul
-        class="absolute top-11 left-0 w-full bg-zinc-8 bg-zinc-800 rounded-md p-1"
-      >
-        <li
-          [routerLink]="'/profile'"
-          class="bg-zinc-800 hover:bg-zinc-700 text-orange-400 font-semibold cursor-pointer px-4 py-2 flex items-center space-x-2"
+    <div *ngIf="showDropdown()" 
+      class="absolute top-12 right-0 w-48 bg-zinc-800 rounded-md shadow-lg py-1 border border-zinc-700 z-50 transform origin-top-right transition-transform duration-150 ease-out"
+    >
+      <ul class="divide-y divide-zinc-700">
+        <li *ngFor="let item of menuItems" 
+          [routerLink]="item.route"
+          class="cursor-pointer hover:bg-zinc-700 transition-colors duration-150 px-4 py-2 flex items-center space-x-3"
         >
-          <mat-icon>person</mat-icon> <span>Profile</span>
-        </li>
-        <li
-          [routerLink]="'/auth'"
-          class="bg-zinc-800 hover:bg-zinc-700 text-red-400 font-semibold cursor-pointer px-4 py-2 flex items-center space-x-2"
-        >
-          <mat-icon>logout</mat-icon> <span>Logout</span>
+          <mat-icon [ngClass]="item.class">{{ item.icon }}</mat-icon>
+          <span [ngClass]="item.class" class="font-medium">{{ item.title }}</span>
         </li>
       </ul>
     </div>
