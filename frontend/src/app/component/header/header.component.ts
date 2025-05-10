@@ -16,7 +16,7 @@ export class HeaderComponent {
   set_show_model() {
     this.show_model.update((value: Boolean) => value = !value)
   }
-  show_model = signal(false)
   constructor() { }
+  show_model = signal(false)
 }
 
