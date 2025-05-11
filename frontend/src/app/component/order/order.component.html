@@ -1,1 +1,135 @@
-<p>order works!</p>
+<div class="order bg-zinc-900 rounded-lg shadow-md p-6">
+    <h2 class="text-lg font-semibold text-amber-400 mb-5 block md:hidden">
+      Order Management
+    </h2>
+  
+    <form class="space-y-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="space-y-2">
+          <label
+            for="order_number"
+            class="block text-sm font-medium text-gray-500"
+            >Order Number:</label
+          >
+          <input
+            [(ngModel)]="order_number"
+            [ngModelOptions]="{ standalone: true }"
+            type="text"
+            id="order_number"
+            class="order_number w-full px-3 bg-zinc-900 text-white py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500"
+          />
+        </div>
+  
+        <div class="space-y-2">
+          <label for="customer_name" class="block text-sm font-medium text-gray-500"
+            >Customer Name:</label
+          >
+          <input
+            [(ngModel)]="customer_name"
+            [ngModelOptions]="{ standalone: true }"
+            type="text"
+            id="customer_name"
+            class="customer_name w-full px-3 bg-zinc-900 text-white py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500"
+          />
+        </div>
+  
+        <div class="space-y-2">
+          <label for="total_amount" class="block text-sm font-medium text-gray-500"
+            >Total Amount:</label
+          >
+          <input
+            [(ngModel)]="total_amount"
+            [ngModelOptions]="{ standalone: true }"
+            type="number"
+            step="0.01"
+            id="total_amount"
+            value="0"
+            class="total_amount w-full px-3 bg-zinc-900 text-white py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500"
+          />
+        </div>
+  
+        <div class="space-y-2">
+          <label for="date" class="block text-sm font-medium text-gray-500"
+            >Order Date:</label
+          >
+          <input
+            [(ngModel)]="date"
+            [ngModelOptions]="{ standalone: true }"
+            type="date"
+            id="date"
+            class="bg-zinc-900 text-white date w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500"
+          />
+        </div>
+  
+        <div class="space-y-2 md:col-span-2">
+          <label for="status" class="block text-sm font-medium text-gray-500">
+            Order Status:
+          </label>
+          <select
+            [(ngModel)]="status"
+            [ngModelOptions]="{ standalone: true }"
+            name="status"
+            id="status"
+            class="w-full px-3 py-2 bg-zinc-900 text-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500"
+          >
+            <option value="" disabled selected>Select status</option>
+            <option *ngFor="let stat of statuses()" [value]="stat">
+              {{ stat }}
+            </option>
+          </select>
+  
+          <div *ngIf="submission_status().status" class="text-red-600 font-semibold">{{submission_status().text}}</div>
+        </div>
+      </div>
+  
+      <div class="pt-4">
+        <button
+          type="button"
+          (click)="add_order()"
+          class="w-full md:w-auto px-4 py-2 bg-amber-500 text-white font-medium rounded-md hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transition-colors"
+        >
+          Create Order
+        </button>
+      </div>
+    </form>
+  
+    <div class="orders grid grid-cols-6 gap-4 mt-6">
+      <div
+        *ngFor="let order of orders"
+        class="order col-span-6 md:col-span-3 lg:col-span-2 bg-zinc-800 border border-zinc-700 rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow hover:border-amber-400"
+      >
+        <div class="flex justify-between items-start">
+          <h3 class="text-xl font-bold text-amber-400 truncate max-w-[70%]">
+            # {{ order.order_number }}
+          </h3>
+          <span class="px-2 py-1 bg-zinc-700 text-white text-xs rounded">
+            # {{ orders.indexOf(order) + 1 }}
+          </span>
+        </div>
+  
+        <p class="text-gray-300 my-2 text-sm">
+          Customer: {{ order.customer_name }}
+        </p>
+  
+        <div class="flex justify-between mt-3 items-center">
+          <span class="font-semibold text-white">
+            ${{ order?.total_amount }}
+          </span>
+          <span
+            class="text-sm px-2 py-1 text-black rounded"
+            [class.bg-red-400]="order?.status === 'Cancelled'"
+            [class.bg-yellow-400]="order?.status === 'Pending'"
+            [class.bg-amber-400]="order?.status === 'Processing'"
+            [class.bg-green-400]="order?.status === 'Completed'"
+          >
+            {{ order?.status }}
+          </span>
+        </div>
+  
+        <p class="text-sm text-gray-400 mt-2 flex items-center">
+          <mat-icon>calendar_today</mat-icon>
+          {{ order?.date || "Date not specified" }}
+        </p>
+      </div>
+    </div>
+  </div>
