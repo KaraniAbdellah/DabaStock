@@ -19,7 +19,7 @@ export const routes: Routes = [
       { path: 'add_stock', component: StockComponent, title: 'Create' },
       { path: 'supplier', component: SupplierComponent, title: 'Suppliers' },
       { path: 'profile', component: ProfileComponent, title: 'Profile' },
-      { path: 'order', component: OrderComponent, title: 'Order' },
+      { path: 'order', component: OrderComponent, title: 'Orders' },
     ],
   },
   { path: 'auth', component: AuthComponent },
