@@ -8,8 +8,18 @@
       class="card bg-zinc-900 p-4 rounded-lg shadow-md text-center col-span-6 md:col-span-3 lg:col-span-2 hover:shadow-lg transition-all duration-300 flex flex-col justify-center"
     >
       <mat-icon class="text-green-400 mb-2">add_circle</mat-icon>
-      <div class="text-gray-500 text-sm mb-1">Current Stock</div>
-      <div class="text-xl font-bold text-green-400">{{ stock_number() }}</div>
+      <div class="text-gray-500 text-sm mb-1">Current Products</div>
+      <div class="text-xl font-bold text-green-400">
+        {{ products_number() }}
+      </div>
+    </div>
+
+    <div
+      class="card bg-zinc-900 p-4 rounded-lg shadow-md text-center col-span-6 md:col-span-3 lg:col-span-2 hover:shadow-lg transition-all duration-300 flex flex-col justify-center"
+    >
+      <mat-icon class="text-amber-400 mb-2">receipt</mat-icon>
+      <div class="text-gray-500 text-sm mb-1">Current Orders</div>
+      <div class="text-xl font-bold text-amber-400">{{ orders_number() }}</div>
     </div>
 
     <div
@@ -20,14 +30,6 @@
       <div class="text-xl font-bold text-purple-400">
         {{ supplier_number() }}
       </div>
-    </div>
-
-    <div
-      class="card bg-zinc-900 p-4 rounded-lg shadow-md text-center col-span-6 md:col-span-3 lg:col-span-2 hover:shadow-lg transition-all duration-300 flex flex-col justify-center"
-    >
-      <mat-icon class="text-teal-400 mb-2">inventory_2</mat-icon>
-      <div class="text-gray-500 text-sm mb-1">Total Products</div>
-      <div class="text-xl font-bold text-teal-400">{{ product_number() }}</div>
     </div>
   </div>
 </div>

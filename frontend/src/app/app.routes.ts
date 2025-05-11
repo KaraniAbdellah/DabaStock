@@ -5,8 +5,8 @@ import { SupplierComponent } from './component/supplier/supplier.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { AuthComponent } from './pages/auth/auth.component';
 import { StockComponent } from './component/stock/stock.component';
-import { ProductComponent } from './component/product/product.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { OrderComponent } from './component/order/order.component';
 
 
 export const routes: Routes = [
@@ -19,7 +19,7 @@ export const routes: Routes = [
       { path: 'add_stock', component: StockComponent, title: 'Create Stock' },
       { path: 'supplier', component: SupplierComponent, title: 'Suppliers' },
       { path: 'profile', component: ProfileComponent, title: 'Profile' },
-      { path: 'product', component: ProductComponent, title: 'Product' },
+      { path: 'order', component: OrderComponent, title: 'Order' },
     ],
   },
   { path: 'auth', component: AuthComponent },
