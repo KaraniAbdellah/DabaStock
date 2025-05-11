@@ -53,4 +53,11 @@ export class StockComponent {
       console.log('Select All Filieds');
     }
   }
+
+  update_product() {
+    
+  }
+  delete_product() {
+
+  }
 }
