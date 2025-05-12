@@ -44,6 +44,9 @@ export class StockComponent {
           price: this.price,
           supplier: this.supplier,
         });
+
+        // Send Request to Add Product Endpoint
+        ///// .......................
       } else {
         // Find the index of the product that will be updated
         const productIndex = this.products.findIndex(
@@ -61,6 +64,9 @@ export class StockComponent {
             supplier: this.supplier,
           };
         }
+
+        // Send Request to Update Product Endpoint
+        ///// .......................
 
         // Reset form to create (Default)
         this.form_state = 'Create Product';
@@ -103,6 +109,8 @@ export class StockComponent {
     this.products = this.products.filter(
       (product) => product_id != product.product_id
     );
+    // Send Request to Delete Order Endpoint
+    ///// .......................
     console.log(this.products);
   }
 }
