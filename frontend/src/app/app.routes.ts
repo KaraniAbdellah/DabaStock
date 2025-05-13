@@ -7,7 +7,7 @@ import { AuthComponent } from './pages/auth/auth.component';
 import { StockComponent } from './component/stock/stock.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { OrderComponent } from './component/order/order.component';
-
+import { AssistanceComponent } from './component/assistance/assistance.component';
 
 export const routes: Routes = [
   {
@@ -20,6 +20,7 @@ export const routes: Routes = [
       { path: 'supplier', component: SupplierComponent, title: 'Suppliers' },
       { path: 'profile', component: ProfileComponent, title: 'Profile' },
       { path: 'order', component: OrderComponent, title: 'Orders' },
+      { path: 'assistance', component: AssistanceComponent, title: 'Assistance' },
     ],
   },
   { path: 'auth', component: AuthComponent },
