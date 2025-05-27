@@ -1,0 +1,143 @@
+<div class="supplier bg-zinc-900 rounded-lg shadow-md p-6">
+    <h2 class="text-lg font-semibold text-purple-400 mb-5 block md:hidden">
+      Supplier Management
+    </h2>
+  
+    <form class="space-y-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="space-y-2">
+          <label
+            for="supplier_name"
+            class="block text-sm font-medium text-gray-500"
+            >Supplier Name:</label
+          >
+          <input
+          required
+            [(ngModel)]="supplier_name"
+            [ngModelOptions]="{ standalone: true }"
+            type="text"
+            id="supplier_name"
+            class="supplier_name w-full px-3 bg-zinc-900 text-white py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
+          />
+        </div>
+  
+        <div class="space-y-2">
+          <label for="contact_name" class="block text-sm font-medium text-gray-500"
+            >Contact Person:</label
+          >
+          <input
+          required
+            [(ngModel)]="contact_name"
+            [ngModelOptions]="{ standalone: true }"
+            type="text"
+            id="contact_name"
+            class="contact_name w-full px-3 bg-zinc-900 text-white py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
+          />
+        </div>
+  
+        <div class="space-y-2">
+          <label for="email" class="block text-sm font-medium text-gray-500"
+            >Email:</label
+          >
+          <input
+          required
+            [(ngModel)]="email"
+            [ngModelOptions]="{ standalone: true }"
+            type="email"
+            id="email"
+            class="email w-full px-3 bg-zinc-900 text-white py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
+          />
+        </div>
+  
+        <div class="space-y-2">
+          <label for="phone" class="block text-sm font-medium text-gray-500"
+            >Phone Number:</label
+          >
+          <input
+          required
+            [(ngModel)]="phone"
+            [ngModelOptions]="{ standalone: true }"
+            type="tel"
+            id="phone"
+            class="bg-zinc-900 text-white phone w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
+          />
+        </div>
+  
+        <div class="space-y-2 md:col-span-2">
+          <label for="address" class="block text-sm font-medium text-gray-500"
+            >Address:</label
+          >
+          <textarea
+            [(ngModel)]="address"
+            [ngModelOptions]="{ standalone: true }"
+            id="address"
+            rows="2"
+            class="bg-zinc-900 text-white address w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
+          ></textarea>
+  
+          <div *ngIf="submission_status().status" class="text-red-600 font-semibold">{{submission_status().text}}</div>
+        </div>
+      </div>
+  
+      <div class="pt-4">
+        <button
+          type="submit"
+          (click)="add_supplier()"
+          class="w-full md:w-auto px-4 py-2 bg-purple-500 text-white font-medium rounded-md hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors"
+        >
+          {{form_state}}
+        </button>
+      </div>
+    </form>
+  
+    <div class="suppliers grid grid-cols-6 gap-4 mt-6">
+      <div
+        *ngFor="let supplier of suppliers"
+        class="supplier col-span-6 md:col-span-3 lg:col-span-2 bg-zinc-800 border border-zinc-700 rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow hover:border-purple-400"
+      >
+        
+        <div class="flex justify-between items-start">
+            <h3 class="text-xl font-bold text-purple-400 truncate max-w-[70%]">
+              # {{ supplier.supplier_name }}
+            </h3>
+            <span class="px-2 py-1 bg-zinc-700 text-white text-xs rounded">
+                # {{ suppliers.indexOf(supplier) + 1 }}
+            </span>
+          </div>
+  
+        <p class="text-gray-300 my-2 text-sm">
+          Contact: {{ supplier.contact_name }}
+        </p>
+  
+        <div class="flex flex-col gap-1 mt-3">
+          <p class="text-sm text-gray-400 flex items-center gap-1">
+            <mat-icon class="text-purple-400">email</mat-icon>
+            {{ supplier.email }}
+          </p>
+          <p class="text-sm text-gray-400 flex items-center gap-1">
+            <mat-icon class="text-purple-400">phone</mat-icon>
+            {{ supplier.phone }}
+          </p>
+          <p class="text-sm text-gray-400 flex items-center gap-1">
+            <mat-icon class="text-purple-400">home</mat-icon>
+            {{ supplier.address }}
+          </p>
+        </div>
+        <div class="btns flex gap-4 mt-4">
+          <button
+          (click)="update_supplier(supplier.supplier_id)"
+            class="update flex justify-center items-center bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-4 rounded shadow"
+          >
+            <mat-icon>edit</mat-icon> <span class="ml-1">Update</span>
+          </button>
+          <button
+          (click)="delete_supplier(supplier.supplier_id)"
+            class="delete flex justify-center items-center bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded shadow"
+          >
+          <mat-icon>delete</mat-icon> <span class="ml-1">Delete</span>
+          </button>
+        </div>
+  
+      </div>
+    </div>
+  </div>

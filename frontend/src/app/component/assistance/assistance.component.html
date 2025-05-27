@@ -1,0 +1,36 @@
+<main class="min-h-[calc(100vh-120px)] flex flex-col justify-between">
+  <div class="prompts w-full h-[calc(100vh-200px)] px-6 py-4 overflow-y-auto overflow-x-hidden">
+    <ng-container *ngFor="let prompt of prompts; let i=index">
+      <div class="prompt text-zinc-900 flex justify-end mb-3">
+        <p class="bg-zinc-900 text-white px-3 py-2 rounded-md">{{prompt.text}}</p>
+      </div>
+      <div class="reponse text-zinc-900 flex justify-start items-start mb-3" *ngIf="prompts_response[i]?.text">
+        <div class="w-10 h-10 mr-2 flex-shrink-0">
+          <mat-icon class="text-white">smart_toy</mat-icon>
+        </div>
+        <p class="bg-zinc-900 text-white px-3 py-2 rounded-md">{{prompts_response[i].text}}</p>
+      </div>
+    </ng-container>
+    <p *ngIf="this.prompts_response.length === 0" class="text-white text-xl font-semibold text-center">How I can help you today ?</p>
+  </div>
+  
+  <form
+    (submit)="get_prompt($event)"
+    class="user_input w-full flex justify-between items-center rounded-full bg-zinc-900 p-3"
+  >
+    <input
+      disabled="{{isDisabled}}"
+      [(ngModel)]="prompt_msg"
+      [ngModelOptions]="{standalone: true}"
+      type="text"
+      class="w-[80%] p-3 rounded-full bg-transparent text-white focus:outline-none"
+      placeholder="Ask Anything"
+    />
+    <button
+      type="submit"
+      class="bg-zinc-800 text-white hover:bg-white hover:text-zinc-900 rounded-full p-3 flex justify-center items-center text-sm"
+    >
+      <mat-icon>send</mat-icon>
+    </button>
+  </form>
+</main>

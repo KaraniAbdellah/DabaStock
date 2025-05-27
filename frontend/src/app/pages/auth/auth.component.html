@@ -1,0 +1,118 @@
+<div class="flex items-center justify-center min-h-screen bg-zinc-900 p-4">
+  <div class="w-full max-w-md">
+    <div class="bg-zinc-800 rounded-xl shadow-2xl overflow-hidden">
+      <div class="p-8 text-center">
+        <h1 class="text-3xl font-bold text-yellow-500 mb-2">Welcome back!</h1>
+        <p class="text-zinc-300">
+          <span *ngIf="isLogin">Login</span>
+          <span *ngIf="!isLogin">Sign up</span> to access your stock
+        </p>
+      </div>
+
+      <div class="px-8 pb-8">
+        <div class="tabs w-full mb-4 flex justify-center items-center">
+          <button
+            (click)="toggleForm()"
+            type="submit"
+            [class.bg-yellow-500]="isLogin === true"
+            class="w-full py-3 px-4 hover:bg-yellow-600 text-white font-medium transition duration-200 flex items-center justify-center"
+          >
+            Login
+          </button>
+          <button
+            [class.bg-yellow-500]="isLogin === false"
+            (click)="toggleForm()"
+            type="submit"
+            class="w-full py-3 px-4 hover:bg-yellow-600 text-white font-medium transition duration-200 flex items-center justify-center"
+          >
+            Sign Up
+          </button>
+        </div>
+
+        <form class="space-y-6">
+          @if (!isLogin) {
+          <div>
+            <label
+              for="email"
+              class="block text-sm font-medium text-zinc-300 mb-1"
+              >Name</label
+            >
+            <div class="relative rounded-md shadow-sm">
+              <div
+                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+              >
+                <mat-icon class="text-zinc-400">person</mat-icon>
+              </div>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                placeholder="your@email.com"
+                class="block w-full pl-10 px-4 py-3 bg-zinc-700 border border-zinc-600 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 placeholder-zinc-400 text-white"
+              />
+            </div>
+          </div>
+          }
+
+          <div>
+            <label
+              for="email"
+              class="block text-sm font-medium text-zinc-300 mb-1"
+              >Email</label
+            >
+            <div class="relative rounded-md shadow-sm">
+              <div
+                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+              >
+                <mat-icon class="text-zinc-400">email</mat-icon>
+              </div>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                placeholder="your@email.com"
+                class="block w-full pl-10 px-4 py-3 bg-zinc-700 border border-zinc-600 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 placeholder-zinc-400 text-white"
+              />
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <label
+                for="password"
+                class="block text-sm font-medium text-zinc-300"
+                >Password</label
+              >
+            </div>
+            <div class="relative rounded-md shadow-sm">
+              <div
+                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+              >
+                <mat-icon class="text-zinc-400">lock</mat-icon>
+              </div>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                required
+                placeholder="••••••••"
+                class="block w-full pl-10 px-4 py-3 bg-zinc-700 border border-zinc-600 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 placeholder-zinc-400 text-white"
+              />
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full py-3 px-4 bg-yellow-500 hover:bg-yellow-600 focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 text-white font-medium rounded-lg transition duration-200 flex items-center justify-center"
+          >
+            <mat-icon class="mr-2">login</mat-icon>
+            <span *ngIf="isLogin">Login</span>
+            <span *ngIf="!isLogin">Sign up</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
