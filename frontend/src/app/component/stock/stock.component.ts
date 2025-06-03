@@ -1,16 +1,20 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { StockService } from '../../services/stock/stock.service';
 
 @Component({
   selector: 'app-stock',
   imports: [RouterModule, CommonModule, FormsModule, MatIconModule],
   templateUrl: './stock.component.html',
   styleUrl: './stock.component.css',
+  providers: [StockService]
 })
 export class StockComponent {
+  productService = inject(StockService);
+
   suppliers = signal([{ name: 'ahmed' }, { name: 'Mohamed' }]);
   products: any[] = []; // Array Of Objects (products)
   submission_status = signal({
@@ -46,7 +50,15 @@ export class StockComponent {
         });
 
         // Send Request to Add Product Endpoint
-        ///// .......................
+        let product = {
+            "product_name": "HP",
+            "product_description": "High-end Education laptop",
+            "product_quantity": 10,
+            "supplier_name": "TechSupplier Inc.",
+            "price_price": 0.0
+        }
+        this.productService.addProduct()
+        
       } else {
         // Find the index of the product that will be updated
         const productIndex = this.products.findIndex(
@@ -113,4 +125,15 @@ export class StockComponent {
     ///// .......................
     console.log(this.products);
   }
+
+  ngOnInit() {
+    this.productService.test();
+
+    this.productService.getAllProducts().subscribe(products => {
+      console.log(products);
+    });
+  }
+
 }
+
+
