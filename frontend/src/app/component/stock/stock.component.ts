@@ -57,7 +57,6 @@ export class StockComponent {
             "supplier_name": "TechSupplier Inc.",
             "price_price": 0.0
         }
-        this.productService.addProduct()
         
       } else {
         // Find the index of the product that will be updated
