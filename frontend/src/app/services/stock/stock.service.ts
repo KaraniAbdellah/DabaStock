@@ -16,7 +16,8 @@ export class StockService {
     return this.http.get(`${this.url}/get_products`);
   }
 
-  addProduct(data: Product) {
+  addProduct(data: any) {
+    console.log("We Should Send Request");
     return this.http.post(`${this.url}/add_product`, data);
   }
 

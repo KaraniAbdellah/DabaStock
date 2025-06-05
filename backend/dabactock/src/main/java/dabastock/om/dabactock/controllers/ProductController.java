@@ -27,6 +27,7 @@ public class ProductController {
 
     @PostMapping ("/add_product")
     public ResponseEntity<Product> addProduct(@RequestBody Product product) {
+        System.out.println("Hello Add Product End Point");
         Product add_product =  product_service.AddProduct(product);
         return new ResponseEntity<>(add_product, HttpStatusCode.valueOf(200));
     }

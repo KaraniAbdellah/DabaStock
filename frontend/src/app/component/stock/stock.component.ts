@@ -25,38 +25,41 @@ export class StockComponent {
 
   form_state: String = 'Create Product';
   product_name: string = '';
-  description: string = '';
-  quantity: string = '0';
-  price: string = '0';
-  supplier: string = '';
+  product_description: string = '';
+  product_quantity: string = '0';
+  product_price: string = '0';
+  supplier_name: string = '';
   current_product_id: Number | null = null;
 
   add_product() {
     if (
       this.product_name &&
-      this.description &&
-      this.quantity &&
-      this.price &&
-      this.supplier
+      this.product_description &&
+      this.product_quantity &&
+      this.product_price &&
+      this.supplier_name
     ) {
       if (this.form_state == 'Create Product') {
-        this.products.push({
-          product_id: Date.now(),
-          product_name: this.product_name,
-          description: this.description,
-          quantity: this.quantity,
-          price: this.price,
-          supplier: this.supplier,
-        });
 
         // Send Request to Add Product Endpoint
         let product = {
-            "product_name": "HP",
-            "product_description": "High-end Education laptop",
-            "product_quantity": 10,
-            "supplier_name": "TechSupplier Inc.",
-            "price_price": 0.0
+          product_name: this.product_name,
+          product_description: this.product_description,
+          product_quantity: this.product_quantity,
+          product_price: this.product_price,
+          supplier_name: this.supplier_name
         }
+        this.products.push(product);
+        console.log(product);
+        this.productService.addProduct(product).subscribe({
+          next: (response) => {
+            console.log('Product added:', response);
+          },
+          error: (err) => {
+            console.error('Error adding product:', err);
+          }
+        });
+
         
       } else {
         // Find the index of the product that will be updated
@@ -69,10 +72,10 @@ export class StockComponent {
           this.products[productIndex] = {
             ...this.products[productIndex],
             product_name: this.product_name,
-            description: this.description,
-            quantity: this.quantity,
-            price: this.price,
-            supplier: this.supplier,
+            product_description: this.product_description,
+            product_quantity: this.product_quantity,
+            product_price: this.product_price,
+            supplier_name: this.supplier_name,
           };
         }
 
@@ -88,10 +91,10 @@ export class StockComponent {
 
       // Reset All Fields
       this.product_name = '';
-      this.description = '';
-      this.quantity = '0';
-      this.price = '0';
-      this.supplier = '';
+      this.product_description = '';
+      this.product_quantity = '0';
+      this.product_price = '0';
+      this.supplier_name = '';
     } else {
       this.submission_status().status = true;
       console.log('Select All Filieds');
@@ -108,10 +111,10 @@ export class StockComponent {
     );
     this.form_state = 'Update Product';
     this.product_name = updatedProduct.product_name;
-    this.description = updatedProduct.description;
-    this.quantity = updatedProduct.quantity;
-    this.price = updatedProduct.price;
-    this.supplier = updatedProduct.supplier;
+    this.product_description = updatedProduct.product_description;
+    this.product_quantity = updatedProduct.product_quantity;
+    this.product_price = updatedProduct.product_price;
+    this.supplier_name = updatedProduct.supplier_name;
     this.current_product_id = product_id;
   }
 
@@ -126,10 +129,8 @@ export class StockComponent {
   }
 
   ngOnInit() {
-    this.productService.test();
-
-    this.productService.getAllProducts().subscribe(products => {
-      console.log(products);
+    this.productService.getAllProducts().subscribe((data: any) => {
+      this.products = data;
     });
   }
 

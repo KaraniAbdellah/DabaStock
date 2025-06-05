@@ -25,7 +25,7 @@
           >Description:</label
         >
         <input
-          [(ngModel)]="description"
+          [(ngModel)]="product_description"
           [ngModelOptions]="{ standalone: true }"
           type="text"
           id="description"
@@ -38,7 +38,7 @@
           >Quantity:</label
         >
         <input
-          [(ngModel)]="quantity"
+          [(ngModel)]="product_quantity"
           [ngModelOptions]="{ standalone: true }"
           type="number"
           id="quantity"
@@ -52,7 +52,7 @@
           >Price:</label
         >
         <input
-          [(ngModel)]="price"
+          [(ngModel)]="product_price"
           [ngModelOptions]="{ standalone: true }"
           type="number"
           step="0.01"
@@ -67,7 +67,7 @@
           Choose a Supplier:
         </label>
         <select
-          [(ngModel)]="supplier"
+          [(ngModel)]="supplier_name"
           [ngModelOptions]="{ standalone: true }"
           name="supplier"
           id="supplier"
@@ -115,7 +115,7 @@
       </div>
 
       <p class="text-gray-300 my-2 text-sm line-clamp-2">
-        {{ product?.description || "No description available" }}
+        {{ product?.product_description || "No description available" }}
       </p>
 
       <div class="flex justify-between mt-3 items-center">
@@ -123,14 +123,14 @@
           ${{ product?.price || 0 | number : "1.2-2" }}
         </span>
         <span
-          class="text-sm px-2 py-1 rounded"
-          [class.bg-red-500]="product?.quantity <= 5"
+          class="text-sm px-2 py-1 rounded text-white"
+          [class.bg-red-500]="product?.product_quantity <= 5"
           [class.bg-yellow-500]="
-            product?.quantity > 5 && product?.quantity <= 15
+            product?.product_quantity > 5 && product?.product_quantity <= 15
           "
-          [class.bg-green-500]="product?.quantity > 15"
+          [class.bg-green-500]="product?.product_quantity > 15"
         >
-          Qty: {{ product?.quantity || 0 }}
+          Qty: {{ product?.product_quantity || 0 }}
         </span>
       </div>
 
