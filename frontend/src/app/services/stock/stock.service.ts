@@ -17,12 +17,18 @@ export class StockService {
   }
 
   addProduct(data: any) {
-    console.log("We Should Send Request");
     return this.http.post(`${this.url}/add_product`, data);
+  }
+
+  deleteProduct(id: any) {
+    return this.http.delete(`${this.url}/delete_product/${id}`);
+  }
+  updateProduct(id: any, data: any) {
+    return this.http.put(`${this.url}/update_product/${id}`, data);
   }
 
   test() {
     console.log("Hello World");
   }
-  
 }
+

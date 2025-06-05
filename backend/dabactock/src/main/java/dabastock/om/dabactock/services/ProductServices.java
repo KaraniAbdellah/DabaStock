@@ -33,7 +33,7 @@ public class ProductServices {
             UpdatedProduct.setProduct_name(product.getProduct_name());
             UpdatedProduct.setProduct_description(product.getProduct_description());
             UpdatedProduct.setProduct_quantity(product.getProduct_quantity());
-            UpdatedProduct.setPrice_price(product.getPrice_price());
+            UpdatedProduct.setProduct_price(product.getProduct_price());
             UpdatedProduct.setSupplier_name(product.getSupplier_name());
             product_repo.save(UpdatedProduct);
         }

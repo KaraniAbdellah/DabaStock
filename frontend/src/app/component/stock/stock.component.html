@@ -120,7 +120,7 @@
 
       <div class="flex justify-between mt-3 items-center">
         <span class="font-semibold text-white">
-          ${{ product?.price || 0 | number : "1.2-2" }}
+          ${{ product?.product_price || 0 | number : "1.2-2" }}
         </span>
         <span
           class="text-sm px-2 py-1 rounded text-white"
@@ -136,7 +136,7 @@
 
       <p class="text-sm text-gray-400 mt-2 flex items-center">
         <mat-icon>person</mat-icon>
-        {{ product?.supplier || "Supplier not specified" }}
+        {{ product?.supplier_name || "Supplier not specified" }}
       </p>
 
       <div class="btns flex gap-4 mt-4">

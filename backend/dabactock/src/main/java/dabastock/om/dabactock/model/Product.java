@@ -31,9 +31,24 @@ public class Product {
     public String getProduct_description() {
         return this.product_description;
     }
+    public int getProduct_id() {
+        return this.product_id;
+    }
 
     public void setProduct_description(String product_description) {
         this.product_description = product_description;
+    }
+
+    public void setProduct_id(int product_id) {
+        this.product_id = product_id;
+    }
+
+    public double getProduct_price() {
+        return product_price;
+    }
+
+    public void setProduct_price(double product_price) {
+        this.product_price = product_price;
     }
 
     public String getProduct_name() {
@@ -52,13 +67,7 @@ public class Product {
         this.product_quantity = product_quantity;
     }
 
-    public double getPrice_price() {
-        return this.product_price;
-    }
 
-    public void setPrice_price(double product_price) {
-        this.product_price = product_price;
-    }
 
     public String getSupplier_name() {
         return this.supplier_name;

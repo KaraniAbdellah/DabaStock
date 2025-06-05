@@ -59,8 +59,6 @@ export class StockComponent {
             console.error('Error adding product:', err);
           }
         });
-
-        
       } else {
         // Find the index of the product that will be updated
         const productIndex = this.products.findIndex(
@@ -79,8 +77,20 @@ export class StockComponent {
           };
         }
 
+        console.log(this.current_product_id);
+        let updatedProduct = this.products[productIndex];
+        console.log(updatedProduct);
+
         // Send Request to Update Product Endpoint
-        ///// .......................
+        this.productService.updateProduct(this.current_product_id, updatedProduct).subscribe({
+          next: (response) => {
+            console.log('Product Updated:', response);
+          },
+          error: (err) => {
+            console.error('Error updated product:', err);
+          }
+        });
+
 
         // Reset form to create (Default)
         this.form_state = 'Create Product';
@@ -119,13 +129,19 @@ export class StockComponent {
   }
 
   delete_product(product_id: Number) {
+    console.log(product_id);
+    this.productService.deleteProduct(product_id).subscribe({
+      next: (response) => {
+        console.log('Product Deleted:', response);
+      },
+      error: (err) => {
+        console.error('Error deleting product:', err);
+      }
+    });
     console.log(this.products);
     this.products = this.products.filter(
       (product) => product_id != product.product_id
     );
-    // Send Request to Delete Order Endpoint
-    ///// .......................
-    console.log(this.products);
   }
 
   ngOnInit() {
