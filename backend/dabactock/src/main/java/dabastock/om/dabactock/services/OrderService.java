@@ -37,7 +37,6 @@ public class OrderService {
             order_updated.setTotal_amount(new_order.getTotal_amount());
             order_repo.save(order_updated);
         }
-
     }
 
 
