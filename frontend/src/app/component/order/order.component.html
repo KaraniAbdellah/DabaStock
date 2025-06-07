@@ -7,16 +7,16 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="space-y-2">
           <label
-            for="order_number"
+            for="order_id"
             class="block text-sm font-medium text-gray-500"
             >Order Number:</label
           >
           <input
-            [(ngModel)]="order_number"
+            [(ngModel)]="order_id"
             [ngModelOptions]="{ standalone: true }"
             type="text"
-            id="order_number"
-            class="order_number w-full px-3 bg-zinc-900 text-white py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500"
+            id="order_id"
+            class="order_id w-full px-3 bg-zinc-900 text-white py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500"
           />
         </div>
   
@@ -53,7 +53,7 @@
             >Order Date:</label
           >
           <input
-            [(ngModel)]="date"
+            [(ngModel)]="order_date"
             [ngModelOptions]="{ standalone: true }"
             type="date"
             id="date"
@@ -66,7 +66,7 @@
             Order Status:
           </label>
           <select
-            [(ngModel)]="status"
+            [(ngModel)]="order_status"
             [ngModelOptions]="{ standalone: true }"
             name="status"
             id="status"
@@ -78,7 +78,7 @@
             </option>
           </select>
   
-          <div *ngIf="submission_status().status" class="text-red-600 font-semibold">{{submission_status().text}}</div>
+          <div *ngIf="submission_status().order_status" class="text-red-600 font-semibold">{{submission_status().text}}</div>
         </div>
       </div>
   
@@ -100,7 +100,7 @@
       >
         <div class="flex justify-between items-start">
           <h3 class="text-xl font-bold text-amber-400 truncate max-w-[70%]">
-            # {{ order.order_number }}
+            # {{ order.order_id }}
           </h3>
           <span class="px-2 py-1 bg-zinc-700 text-white text-xs rounded">
             # {{ orders.indexOf(order) + 1 }}
@@ -128,7 +128,7 @@
   
         <p class="text-sm text-gray-400 mt-2 flex items-center">
           <mat-icon>calendar_today</mat-icon>
-          {{ order?.date || "Date not specified" }}
+          {{ order?.order_date || "Date not specified" }}
         </p>
         <div class="btns flex gap-4 mt-4">
           <button

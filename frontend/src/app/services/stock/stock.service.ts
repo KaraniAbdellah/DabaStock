@@ -23,12 +23,9 @@ export class StockService {
   deleteProduct(id: any) {
     return this.http.delete(`${this.url}/delete_product/${id}`);
   }
+
   updateProduct(id: any, data: any) {
     return this.http.put(`${this.url}/update_product/${id}`, data);
-  }
-
-  test() {
-    console.log("Hello World");
   }
 }
 
