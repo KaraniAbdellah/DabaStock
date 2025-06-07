@@ -25,7 +25,7 @@ export class OrderComponent {
   });
 
   form_order_state: string = 'Create Order';
-  order_id: string = '';
+  order_name: string = '';
   customer_name: string = '';
   total_amount: string = '0';
   order_date: string = '';
@@ -34,23 +34,32 @@ export class OrderComponent {
 
   add_order() {
     if (
-      this.order_id &&
+      this.order_name &&
       this.customer_name &&
       this.total_amount &&
       this.order_date &&
       this.order_status
     ) {
       if (this.form_order_state === 'Create Order') {
-        this.orders.push({
-          order_id: this.order_id,
+        let order =  {
+          order_name: this.order_name,
           customer_name: this.customer_name,
-          total_amount: this.total_amount,
-          order_date: this.order_date,
-          order_status: this.order_status,
-        });
+          total_amount: parseFloat(this.total_amount),
+          order_date:  this.order_date,
+          order_status: this.order_status
+      }
+        this.orders.push(order);
 
         // Send Request to Add Order Endpoint
-        /////////////////////// ......................
+        this.order_services.addOrder(order).subscribe({
+          next: (response) => {
+            console.log('Order Added:', response);
+          },
+          error: (err) => {
+            console.error('Error Added Order:', err);
+          }
+        });
+
       } else {
         // Find the index of the order that will be updated
         const orderIndex = this.orders.findIndex(
@@ -58,18 +67,26 @@ export class OrderComponent {
         );
 
         if (orderIndex !== -1) {
+          // Update the local array first
           this.orders[orderIndex] = {
             ...this.orders[orderIndex],
-            order_id: this.order_id,
+            order_name: this.order_name,
             customer_name: this.customer_name,
-            total_amount: this.total_amount,
+            total_amount: parseFloat(this.total_amount),
             order_date: this.order_date,
             order_status: this.order_status,
           };
-        }
 
-        // Send Request to Update Order Endpoint
-        /////////////////////// ......................
+          // Send Request to Update Order Endpoint with order_id and updated order data
+          this.order_services.updateOrder(this.current_order_id, this.orders[orderIndex]).subscribe({
+            next: (response) => {
+              console.log('Order Updated:', response);
+            },
+            error: (err) => {
+              console.error('Error Updated Order:', err);
+            }
+          });
+        }
 
         // Reset form state
         this.form_order_state = 'Create Order';
@@ -79,7 +96,7 @@ export class OrderComponent {
       this.submission_status().order_status = false;
 
       // Reset all fields
-      this.order_id = '';
+      this.order_name = '';
       this.customer_name = '';
       this.total_amount = '0';
       this.order_date = '';
@@ -102,9 +119,9 @@ export class OrderComponent {
 
     if (updatedOrder) {
       this.form_order_state = 'Update Order';
-      this.order_id = updatedOrder.order_id;
+      this.order_name = updatedOrder.order_name;
       this.customer_name = updatedOrder.customer_name;
-      this.total_amount = updatedOrder.total_amount;
+      this.total_amount = updatedOrder.total_amount.toString();
       this.order_date = updatedOrder.order_date;
       this.order_status = updatedOrder.order_status;
       this.current_order_id = order_id;

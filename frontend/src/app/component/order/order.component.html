@@ -9,10 +9,10 @@
           <label
             for="order_id"
             class="block text-sm font-medium text-gray-500"
-            >Order Number:</label
+            >Order Name:</label
           >
           <input
-            [(ngModel)]="order_id"
+            [(ngModel)]="order_name"
             [ngModelOptions]="{ standalone: true }"
             type="text"
             id="order_id"
@@ -100,7 +100,7 @@
       >
         <div class="flex justify-between items-start">
           <h3 class="text-xl font-bold text-amber-400 truncate max-w-[70%]">
-            # {{ order.order_id }}
+            # {{ order.order_name }}
           </h3>
           <span class="px-2 py-1 bg-zinc-700 text-white text-xs rounded">
             # {{ orders.indexOf(order) + 1 }}
@@ -117,12 +117,12 @@
           </span>
           <span
             class="text-sm px-2 py-1 text-black rounded"
-            [class.bg-red-400]="order?.status === 'Cancelled'"
-            [class.bg-yellow-400]="order?.status === 'Pending'"
-            [class.bg-amber-400]="order?.status === 'Processing'"
-            [class.bg-green-400]="order?.status === 'Completed'"
+            [class.bg-red-400]="order?.order_status === 'Cancelled'"
+            [class.bg-yellow-400]="order?.order_status === 'Pending'"
+            [class.bg-amber-400]="order?.order_status === 'Processing'"
+            [class.bg-green-400]="order?.order_status === 'Completed'"
           >
-            {{ order?.status }}
+            {{ order?.order_status }}
           </span>
         </div>
   

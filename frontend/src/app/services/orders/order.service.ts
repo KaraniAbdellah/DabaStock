@@ -25,7 +25,7 @@ export class OrderService {
     return this.http.post(`${this.url}/post_order`, data);
   }
 
-  updateProduct(id: any, data: any) {
+  updateOrder(id: any, data: any) {
     return this.http.put(`${this.url}/update_order/${id}`, data);
   }
 
