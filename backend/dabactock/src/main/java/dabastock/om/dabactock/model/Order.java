@@ -35,6 +35,10 @@ public class Order {
         this.order_status = order_status;
     }
 
+    public Order() {
+
+    }
+
     public int getOrder_id() {
         return order_id;
     }

@@ -32,12 +32,12 @@ public class OrderController {
     }
 
     @DeleteMapping("/delete_order/{id}")
-    public void deleteOrder(@RequestParam int id) {
+    public void deleteOrder(@PathVariable int id) {
         order_service.deleteOrder(id);
     }
 
     @PutMapping("/update_order/{id}")
-    public void updateOrder(@RequestBody Order order, @RequestParam int id) {
+    public void updateOrder(@RequestBody Order order, @PathVariable int id) {
         order_service.updateOrder(id, order);
     }
 }
