@@ -12,37 +12,33 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/order")
+@CrossOrigin("*")
 public class OrderController {
 
     @Autowired
     private OrderService order_service;
 
-    @GetMapping("get_orders")
+    @GetMapping("/get_orders")
     public List<Order> getOrders() {
-        List <Order> orders = new ArrayList<Order>();
-        orders.add(new Order(1, "Order Name", "Customer Name",
-                120.3, "20/23/2005", "Not Completed"));
-        return orders;
+        return order_service.getOrders();
     }
 
-    @PostMapping("post_order")
+    @PostMapping("/post_order")
     public ResponseEntity<Order> addOrder(@RequestBody Order order) {
         Order add_order = order_service.addProduct(order);
         return new ResponseEntity<Order>(add_order, HttpStatusCode.valueOf(200));
     }
 
-    @DeleteMapping("delete_order")
+    @DeleteMapping("/delete_order/{id}")
     public void deleteOrder(@RequestParam int id) {
         order_service.deleteOrder(id);
     }
 
-    @PutMapping("update_order")
+    @PutMapping("/update_order/{id}")
     public void updateOrder(@RequestBody Order order, @RequestParam int id) {
         order_service.updateOrder(id, order);
     }
 }
-
-
 
