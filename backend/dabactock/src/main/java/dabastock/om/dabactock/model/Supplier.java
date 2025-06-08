@@ -9,9 +9,10 @@ public class Supplier {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="supplier_id")
-    private Long supplier_id;
+    private int supplier_id;
 
-    @Column(name = "supplier_name", nullable = false)
+
+    @Column(name = "supplier_name")
     private String supplier_name;
 
     @Column(name = "contact_person")
@@ -26,7 +27,11 @@ public class Supplier {
     @Column(name = "supplier_address")
     private String supplier_address;
 
-    public Supplier(String supplier_name, String contact_person, String supplier_email, String phone_number, String supplier_address) {
+    public Supplier() {}
+
+
+    public Supplier(int supplier_id, String supplier_name, String contact_person, String supplier_email, String phone_number, String supplier_address) {
+        this.supplier_id = supplier_id;
         this.supplier_name = supplier_name;
         this.contact_person = contact_person;
         this.supplier_email = supplier_email;
@@ -34,13 +39,12 @@ public class Supplier {
         this.supplier_address = supplier_address;
     }
 
-    public Supplier() {}
 
-    public Long getSupplier_id() {
+    public int getSupplier_id() {
         return supplier_id;
     }
 
-    public void setSupplier_id(Long supplier_id) {
+    public void setSupplier_id(int supplier_id) {
         this.supplier_id = supplier_id;
     }
 
