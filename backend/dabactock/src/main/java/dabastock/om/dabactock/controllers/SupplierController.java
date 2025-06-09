@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/supplier")
+@CrossOrigin("*")
 public class SupplierController {
     @Autowired
     SupplierService supplier_service;
@@ -24,8 +25,8 @@ public class SupplierController {
 
     @PostMapping("/post_supplier")
     public ResponseEntity<Supplier> postSupplier(@RequestBody Supplier supplier) {
-        Supplier add_supplier=  supplier_service.addSupplier(supplier);
-        return new ResponseEntity<>(add_supplier, HttpStatusCode.valueOf(200));
+        Supplier add_supplier =  supplier_service.addSupplier(supplier);
+        return new ResponseEntity<Supplier>(add_supplier, HttpStatusCode.valueOf(200));
     }
 
     @PutMapping("/update_supplier/{id}")
