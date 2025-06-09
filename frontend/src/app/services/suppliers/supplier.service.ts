@@ -13,15 +13,15 @@ export class SupplierService {
   }
 
   postSupplier(data: any) {
-    return this.http.get(`${this.url}/post_supplier`, data);
+    return this.http.post(`${this.url}/post_supplier`, data);
   }
 
   updateSupplier(data: any,  id: any) {
-    return this.http.get(`${this.url}/update_supplier/${id}`, data);
+    return this.http.put(`${this.url}/update_supplier/${id}`, data);
   }
 
   deleteSupplier(id: any) {
-    return this.http.get(`${this.url}/delete_supplier/${id}`);
+    return this.http.delete(`${this.url}/delete_supplier/${id}`);
   }
 }
 

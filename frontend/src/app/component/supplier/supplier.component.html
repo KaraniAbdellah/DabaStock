@@ -22,16 +22,16 @@
         </div>
   
         <div class="space-y-2">
-          <label for="contact_name" class="block text-sm font-medium text-gray-500"
+          <label for="contact_person" class="block text-sm font-medium text-gray-500"
             >Contact Person:</label
           >
           <input
           required
-            [(ngModel)]="contact_name"
+            [(ngModel)]="contact_person"
             [ngModelOptions]="{ standalone: true }"
             type="text"
-            id="contact_name"
-            class="contact_name w-full px-3 bg-zinc-900 text-white py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
+            id="contact_person"
+            class="contact_person w-full px-3 bg-zinc-900 text-white py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
           />
         </div>
   
@@ -41,11 +41,11 @@
           >
           <input
           required
-            [(ngModel)]="email"
+            [(ngModel)]="supplier_email"
             [ngModelOptions]="{ standalone: true }"
             type="email"
-            id="email"
-            class="email w-full px-3 bg-zinc-900 text-white py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
+            id="supplier_email"
+            class="supplier_email w-full px-3 bg-zinc-900 text-white py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
           />
         </div>
   
@@ -55,7 +55,7 @@
           >
           <input
           required
-            [(ngModel)]="phone"
+            [(ngModel)]="phone_number"
             [ngModelOptions]="{ standalone: true }"
             type="tel"
             id="phone"
@@ -68,7 +68,7 @@
             >Address:</label
           >
           <textarea
-            [(ngModel)]="address"
+            [(ngModel)]="supplier_address"
             [ngModelOptions]="{ standalone: true }"
             id="address"
             rows="2"
@@ -106,21 +106,21 @@
           </div>
   
         <p class="text-gray-300 my-2 text-sm">
-          Contact: {{ supplier.contact_name }}
+          Contact: {{ supplier.contact_person }}
         </p>
   
         <div class="flex flex-col gap-1 mt-3">
           <p class="text-sm text-gray-400 flex items-center gap-1">
             <mat-icon class="text-purple-400">email</mat-icon>
-            {{ supplier.email }}
+            {{ supplier.supplier_email }}
           </p>
           <p class="text-sm text-gray-400 flex items-center gap-1">
             <mat-icon class="text-purple-400">phone</mat-icon>
-            {{ supplier.phone }}
+            {{ supplier.phone_number }}
           </p>
           <p class="text-sm text-gray-400 flex items-center gap-1">
             <mat-icon class="text-purple-400">home</mat-icon>
-            {{ supplier.address }}
+            {{ supplier.supplier_address }}
           </p>
         </div>
         <div class="btns flex gap-4 mt-4">
