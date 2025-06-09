@@ -4,18 +4,21 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { StockService } from '../../services/stock/stock.service';
+import { SupplierService } from '../../services/suppliers/supplier.service';
 
 @Component({
   selector: 'app-stock',
   imports: [RouterModule, CommonModule, FormsModule, MatIconModule],
   templateUrl: './stock.component.html',
   styleUrl: './stock.component.css',
-  providers: [StockService]
+  providers: [StockService, SupplierService]
 })
 export class StockComponent {
   productService = inject(StockService);
+  supplierService = inject(SupplierService);
 
-  suppliers = signal([{ name: 'ahmed' }, { name: 'Mohamed' }]);
+  suppliers: any = [];
+  
   products: any[] = []; // Array Of Objects (products)
   submission_status = signal({
     status: false,
@@ -147,6 +150,14 @@ export class StockComponent {
   ngOnInit() {
     this.productService.getAllProducts().subscribe((data: any) => {
       this.products = data;
+    });
+    // Get The Suppliers
+    this.supplierService.getSupplier().subscribe((data: any) => {
+      console.log(data);
+      data.forEach((element: any) => {
+        this.suppliers.push({name: element.supplier_name});
+      });
+      console.log(this.suppliers);
     });
   }
 
