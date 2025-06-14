@@ -17,9 +17,9 @@ export class DashboardComponent {
   product_service = inject(StockService);
   order_service = inject(OrderService);
 
-  product_number = signal(10)
-  supplier_number = signal(10)
-  orders_number = signal(10)
+  product_number = signal(0)
+  supplier_number = signal(0)
+  orders_number = signal(0)
 
   ngOnInit() {
     // get The Number of Order, Product and Suppliers
