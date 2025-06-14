@@ -4,4 +4,21 @@ spring boot Security:
     - https://www.geeksforgeeks.org/introduction-to-spring-security-and-its-features/
 
 
+// We Have Authentication Stateful vs Stateless
+/*
+    Authentication Stateful (with memory):
+        uui: is generator that generate id of session
+        bcrypt: for password encryption
+        in session we store "username" and "role"
+        we send session to browser, and we store it cookie (set-cookie)
+        each time we session id to server verify
+        each session has time out
+        NOTE: if html code generate in server side --> GOOD
+
+    Authentication Stateless (without memory):
+        We generate token (jwt) --> we can not store token
+        NOTE: if html code generate in client code --> GOOD
+*/
+
+
 
