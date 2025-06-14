@@ -17,7 +17,7 @@ public class LoginController {
     @Autowired
     LoginService login_ser;
 
-    @PostMapping("/getUserByLogin")
+    @GetMapping("/getUserByLogin")
     public ResponseEntity<User> GetUserLogin(@RequestBody User user) {
         List<User> users = login_ser.findUser();
 

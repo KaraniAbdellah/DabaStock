@@ -5,6 +5,8 @@ import dabastock_backend.com.dabastock_backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
     @Autowired
@@ -14,8 +16,8 @@ public class UserService {
         user_repo.deleteById(user_id_iden);
     }
 
-    public User getUser(int user_id_iden) {
-        return user_repo.findById(user_id_iden).orElse(null);
+    public List<User> getUsers() {
+        return user_repo.findAll();
     }
 
     public void updateUser(int user_id_iden, User new_user) {

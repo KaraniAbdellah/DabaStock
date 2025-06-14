@@ -26,6 +26,7 @@ public class User {
         this.user_password = user_password;
         this.user_id_iden = user_id_iden;
     }
+    public User() {}
 
     public String getUser_id_iden() {
         return user_id_iden;
@@ -35,7 +36,7 @@ public class User {
         this.user_id_iden = user_id_iden;
     }
 
-    public User() {}
+
     public int getUser_id() {
         return user_id;
     }
