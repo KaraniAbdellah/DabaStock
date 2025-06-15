@@ -11,11 +11,14 @@ import { MatIconModule } from '@angular/material/icon';
 })
 
 export class ProfileComponent {
-  user_name: string = "abdellah karani"
-  isEdit: boolean = true;
+  // Get This Name Auto
+  user_name: string = "abdellah karani";
 
-  OnChangeEdit() {
-    this.isEdit = !this.isEdit;
+  EditProfile() {
+    
+  }
+  DeleteProfile() {
+
   }
 
   user = {

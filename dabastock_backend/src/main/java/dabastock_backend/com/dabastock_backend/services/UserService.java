@@ -12,22 +12,19 @@ public class UserService {
     @Autowired
     UserRepository user_repo;
 
-    public void deleteUser(int user_id_iden) {
-        user_repo.deleteById(user_id_iden);
+    public void deleteUser(User user) {
+        user_repo.deleteById(user.getUser_id());
     }
 
     public List<User> getUsers() {
         return user_repo.findAll();
     }
 
-    public void updateUser(int user_id_iden, User new_user) {
-        User user_to_update = user_repo.findById(user_id_iden).orElse(null);
-        if (user_to_update != null) {
-            user_to_update.setUser_email(new_user.getUser_email());
-            user_to_update.setUser_name(new_user.getUser_name());
-            user_to_update.setUser_password(new_user.getUser_password());
-            user_repo.save((user_to_update));
-        }
+    public void updateUser(User userToUpdate, User new_user) {
+        userToUpdate.setUser_password(new_user.getUser_password());
+        userToUpdate.setUser_email(new_user.getUser_email());
+        userToUpdate.setUser_name(new_user.getUser_name());
+        user_repo.save(userToUpdate);
     }
 }
 
