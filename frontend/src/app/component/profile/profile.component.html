@@ -3,6 +3,7 @@
     <div
       class="bg-zinc-800 rounded-xl shadow-2xl overflow-hidden p-8 text-center"
     >
+
       <div
         class="mx-auto h-32 w-32 rounded-full border-4 border-yellow-500 overflow-hidden mb-6"
       >
@@ -17,11 +18,15 @@
         <h1 class="text-2xl font-bold text-white">{{ user.name }}</h1>
         <p class="text-zinc-400 flex items-center justify-center w-full">
           <mat-icon class="mr-2 text-yellow-500">email</mat-icon>
-          <input disabled class="bg-zinc-800" type="text" value=" {{ user.email }}" />
+          <input class="bg-zinc-800" type="text" value=" {{ user.email }}" />
         </p>
         <br>
-        <button class="text-white bg-yellow-500 hover:bg-yellow-600 font-semibold px-5 py-2 rounded-md ">Edit Profile</button>
+        <div>
+          <button (click)="OnChangeEdit()" class="text-white bg-yellow-500 hover:bg-yellow-600 font-semibold px-5 py-2 rounded-md mr-2">Edit Profile</button>
+          <button class="text-white bg-red-500 hover:bg-red-600 font-semibold px-5 py-2 rounded-md ">Delete Profile</button>
+        </div>
       </div>
+
     </div>
   </div>
 </div>
