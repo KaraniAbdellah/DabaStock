@@ -23,7 +23,7 @@ export class HeaderComponent {
     { title: 'Profile', icon: 'person' },
   ];
   dropDown = signal(false);
-
+  user_name: string = `${document.cookie.split('; ').find(c => c?.startsWith('user_name='))?.split('=')[1] || ''}`;
 
   // Handle The Drop Down Feature
   @ViewChild('dropdown_btn') button?: ElementRef;
