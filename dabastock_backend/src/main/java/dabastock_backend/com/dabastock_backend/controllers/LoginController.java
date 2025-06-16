@@ -17,7 +17,7 @@ public class LoginController {
     @Autowired
     LoginService login_ser;
 
-    @GetMapping("/getUserByLogin")
+    @PostMapping("/getUserByLogin")
     public ResponseEntity<User> GetUserLogin(@RequestBody User user) {
         List<User> users = login_ser.findUser();
 
@@ -36,6 +36,6 @@ public class LoginController {
             }
         }
 
-        return new ResponseEntity<>(null, HttpStatusCode.valueOf(401));
+        return new ResponseEntity<>(null, HttpStatusCode.valueOf(404));
     }
 }

@@ -5,8 +5,9 @@
         <h1 class="text-3xl font-bold text-yellow-500 mb-2">Welcome back!</h1>
         <p class="text-zinc-300">
           <span *ngIf="isLogin">Login</span>
-          <span *ngIf="!isLogin">Sign up</span> to access your stock
+          <span *ngIf="!isLogin">Sign up</span> <span>to access your stock</span>
         </p>
+        <p [ngClass]="IsError ? 'block': 'hidden'" class="mt-2 font-semibold text-red-600">Oops! Something went wrong. Please try again.</p>
       </div>
 
       <div class="px-8 pb-8">
@@ -29,7 +30,7 @@
           </button>
         </div>
 
-        <form class="space-y-6">
+        <form class="space-y-6" (submit)="SignInUserOrLogin($event)">
           @if (!isLogin) {
           <div>
             <label
@@ -44,12 +45,14 @@
                 <mat-icon class="text-zinc-400">person</mat-icon>
               </div>
               <input
-                type="email"
-                id="email"
-                name="email"
+                type="username"
+                id="username"
+                name="username"
+                [(ngModel)]="user_name" 
+                [ngModelOptions]="{standalone: true}"
                 required
-                placeholder="your@email.com"
-                class="block w-full pl-10 px-4 py-3 bg-zinc-700 border border-zinc-600 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 placeholder-zinc-400 text-white"
+                placeholder="john deo"
+                class="block w-full pl-10 px-4 py-3 outline-none bg-zinc-700 border border-zinc-600 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 placeholder-zinc-400 text-white"
               />
             </div>
           </div>
@@ -68,12 +71,14 @@
                 <mat-icon class="text-zinc-400">email</mat-icon>
               </div>
               <input
+                [(ngModel)]="user_email" 
+                [ngModelOptions]="{standalone: true}"
                 type="email"
                 id="email"
                 name="email"
                 required
                 placeholder="your@email.com"
-                class="block w-full pl-10 px-4 py-3 bg-zinc-700 border border-zinc-600 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 placeholder-zinc-400 text-white"
+                class="block w-full pl-10 px-4 py-3 bg-zinc-700 border outline-none border-zinc-600 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 placeholder-zinc-400 text-white"
               />
             </div>
           </div>
@@ -96,12 +101,15 @@
                 type="password"
                 id="password"
                 name="password"
+                [(ngModel)]="user_password" 
+                [ngModelOptions]="{standalone: true}"
                 required
                 placeholder="••••••••"
-                class="block w-full pl-10 px-4 py-3 bg-zinc-700 border border-zinc-600 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 placeholder-zinc-400 text-white"
+                class="block w-full pl-10 px-4 py-3 bg-zinc-700 border outline-none border-zinc-600 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 placeholder-zinc-400 text-white"
               />
             </div>
           </div>
+          <p [ngClass]="IsEmpty ? 'block': 'hidden'" class="text-red-600 font-semibold">Please fill out all required fields.</p>
 
           <button
             type="submit"
