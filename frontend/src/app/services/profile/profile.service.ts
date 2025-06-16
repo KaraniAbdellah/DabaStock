@@ -14,7 +14,7 @@ export class ProfileService {
   }
 
   deleteProfile(user_id_iden: string) {
-    return this.http.delete(`${this.url}/updateUser/${user_id_iden}`);
+    return this.http.delete(`${this.url}/deleteUser/${user_id_iden}`);
   }
 
 }

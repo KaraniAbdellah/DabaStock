@@ -19,7 +19,7 @@ export class ProfileComponent {
   // Get This Name Auto
   user_name: string = "abdellah karani";
   avatar:string = `https://robohash.org/${this.user_name}`;
-  user_id_iden: string = "19292";
+  user_id_iden: string = "102022";
   user_password: String = "ABDELLAh";
   user_email: string = "AHE@gmail.com";
 
@@ -29,11 +29,24 @@ export class ProfileComponent {
         user_name: this.user_name,
         user_password: this.user_password
     }
-    console.log(new_user);
-    this.profile_service.EditProfile(this.user_id_iden, new_user);
+    this.profile_service.EditProfile(this.user_id_iden, new_user).subscribe({
+      next: (response) => {
+        console.log('User Updated Succeffully:', response);
+      },
+      error: (err) => {
+        console.error('Error Updating User:', err);
+      }
+    });
   }
   DeleteProfile() {
-    this.profile_service.deleteProfile(this.user_id_iden);
+    this.profile_service.deleteProfile(this.user_id_iden).subscribe({
+      next: (response) => {
+        console.log('User Deleted Succeffully:', response);
+      },
+      error: (err) => {
+        console.error('Error Deleting User:', err);
+      }
+    });
   }
 
 }
