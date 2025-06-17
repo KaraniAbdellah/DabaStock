@@ -1,18 +1,21 @@
 import { Component, inject, signal } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { SupplierService } from '../../services/suppliers/supplier.service';
 import { OrderService } from '../../services/orders/order.service';
 import { StockService } from '../../services/stock/stock.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-dashboard',
   imports: [RouterModule, MatIconModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
-  providers: [SupplierService, OrderService, StockService]
+  providers: [SupplierService, OrderService, StockService, AuthService, Router]
 })
 export class DashboardComponent {
+  constructor(private router: Router) {}
+  auth_service = inject(AuthService);
   supplier_service = inject(SupplierService);
   product_service = inject(StockService);
   order_service = inject(OrderService);

@@ -53,8 +53,8 @@ export class AuthComponent {
       this.auth_service.AddUser_SignIn(new_user).subscribe({
         next: (response) => {
           this.IsError = false;
-          document.cookie = `user_name=${new_user.user_name}; SameSite=None; Secure`;
-          document.cookie = `user_id_iden=${new_user.user_id_iden}; SameSite=None; Secure`;
+          document.cookie = `user_name=${new_user.user_name}; SameSite=None; Secure; max-age=31536000`;
+          document.cookie = `user_id_iden=${new_user.user_id_iden}; SameSite=None; Secure; max-age=31536000`;
           this.isLogin = true;
         },
         error: (err) => {
@@ -64,8 +64,12 @@ export class AuthComponent {
       });
     } else {
       this.auth_service.AddUser_Login(new_user).subscribe({
-        next: (response) => {
+        next: (response: any) => {
           this.IsError = false;
+          const user_name: string = response.user_name;
+          const user_id_iden: string = response.user_id_iden;
+          document.cookie = `user_name=${user_name}; SameSite=None; Secure; max-age=31536000`;
+          document.cookie = `user_id_iden=${user_id_iden}; SameSite=None; Secure; max-age=31536000`;
           this.router.navigate(["/"]);
         },
         error: (err) => {

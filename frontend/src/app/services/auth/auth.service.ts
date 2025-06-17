@@ -16,4 +16,8 @@ export class AuthService {
   AddUser_Login(user: any) {
     return this.http.post(`${this.url}/login/getUserByLogin`, user);
   }
+
+  getUser(user_id_iden: string) {
+    return this.http.get(`${this.url}/user/getUser/${user_id_iden}`);
+  }
 }

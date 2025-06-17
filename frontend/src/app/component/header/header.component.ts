@@ -6,7 +6,7 @@ import {
   signal,
   ViewChild,
 } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 
@@ -16,7 +16,9 @@ import { CommonModule } from '@angular/common';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
+
 export class HeaderComponent {
+  constructor(private router: Router) {}
   // Variable Declaration
   down_eles = [
     { title: 'Log out', icon: 'logout' },
@@ -24,6 +26,14 @@ export class HeaderComponent {
   ];
   dropDown = signal(false);
   user_name: string = `${document.cookie.split('; ').find(c => c?.startsWith('user_name='))?.split('=')[1] || ''}`;
+
+  // Log out
+  logout() {
+    document.cookie = `user_name=; SameSite=None; Secure; max-age=0`;
+    document.cookie = `user_id_iden=; SameSite=None; Secure; max-age=0`;
+    this.router.navigate(["/auth"]);
+  }
+
 
   // Handle The Drop Down Feature
   @ViewChild('dropdown_btn') button?: ElementRef;
@@ -37,5 +47,4 @@ export class HeaderComponent {
     }
   }
 
-  constructor() {}
 }

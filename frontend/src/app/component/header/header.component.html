@@ -26,6 +26,7 @@
           <mat-icon>person</mat-icon> <span>Profile</span>
         </li>
         <li
+        (click)="logout()"
           [routerLink]="'/auth'"
           class="bg-zinc-800 hover:bg-zinc-700 text-red-400 font-semibold cursor-pointer px-4 py-2 flex items-center space-x-2"
         >
