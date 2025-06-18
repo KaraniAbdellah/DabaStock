@@ -31,7 +31,11 @@ export class HeaderComponent {
   logout() {
     document.cookie = `user_name=; SameSite=None; Secure; max-age=0`;
     document.cookie = `user_id_iden=; SameSite=None; Secure; max-age=0`;
-    this.router.navigate(["/auth"]);
+    this.router.navigate(["/loading"]);
+    setTimeout(() => {
+      console.log("We Must in Auth after 2 second");
+      this.router.navigate(["/auth"]);
+    }, 2000);
   }
 
 

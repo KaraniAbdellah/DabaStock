@@ -8,7 +8,7 @@ import { StockComponent } from './component/stock/stock.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { OrderComponent } from './component/order/order.component';
 import { AssistanceComponent } from './component/assistance/assistance.component';
-import { LoadingComponent } from './component/loading/loading.component';
+import { LoadingComponent } from './pages/loading/loading.component';
 
 export const routes: Routes = [
   {
