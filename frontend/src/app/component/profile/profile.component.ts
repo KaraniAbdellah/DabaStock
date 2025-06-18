@@ -20,7 +20,7 @@ export class ProfileComponent {
   profile_service = inject(ProfileService);
   auth_service = inject(AuthService);
   // Get This Name Auto
-  
+
   user_id_iden: string = `${document.cookie.split('; ').find(c => c?.startsWith('user_id_iden='))?.split('=')[1] || ''}`;
   user_name: string = "john deo";
   avatar:string = `https://robohash.org/deo`;

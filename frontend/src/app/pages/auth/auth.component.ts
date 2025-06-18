@@ -29,6 +29,7 @@ export class AuthComponent {
     this.isLogin = !this.isLogin;
   }
   SignInUserOrLogin(event: Event) {
+    console.log(this.isLogin);
     event.preventDefault();
     if (this.user_email == "" || this.user_password == "") {
       if (!this.isLogin && this.user_name == "") {
@@ -70,7 +71,10 @@ export class AuthComponent {
           const user_id_iden: string = response.user_id_iden;
           document.cookie = `user_name=${user_name}; SameSite=None; Secure; max-age=31536000`;
           document.cookie = `user_id_iden=${user_id_iden}; SameSite=None; Secure; max-age=31536000`;
-          this.router.navigate(["/"]);
+          setInterval(() => {
+            this.router.navigate(["/"]);
+            // This Should Be A Loading
+          }, 5000);
         },
         error: (err) => {
           this.IsError = true;

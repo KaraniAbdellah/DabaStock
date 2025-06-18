@@ -8,6 +8,7 @@ import { StockComponent } from './component/stock/stock.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { OrderComponent } from './component/order/order.component';
 import { AssistanceComponent } from './component/assistance/assistance.component';
+import { LoadingComponent } from './component/loading/loading.component';
 
 export const routes: Routes = [
   {
@@ -23,7 +24,8 @@ export const routes: Routes = [
       { path: 'assistance', component: AssistanceComponent, title: 'Assistance' },
     ],
   },
-  { path: 'auth', component: AuthComponent },
+  { path: 'auth', component: AuthComponent, title: "Auth" },
+  { path: 'loading', component: LoadingComponent, title: "Loading" },
   { path: 'no_found', component: NotFoundComponent },
   { path: '**', redirectTo: 'no_found' },
 ];

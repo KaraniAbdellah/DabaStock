@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {RouterModule, Router} from "@angular/router";
+import {RouterModule} from "@angular/router";
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -9,7 +9,6 @@ templateUrl: './aside.component.html',
   styleUrl: './aside.component.css'
 })
 export class AsideComponent {
-  constructor(private router: Router) {}
 
   // Log out
   logout() {
