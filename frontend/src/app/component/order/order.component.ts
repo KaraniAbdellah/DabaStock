@@ -11,12 +11,17 @@ import { OrderService } from '../../services/orders/order.service';
   imports: [RouterModule, CommonModule, FormsModule, MatIconModule],
   templateUrl: './order.component.html',
   styleUrl: './order.component.css',
-  providers: [OrderService]
+  providers: [OrderService],
 })
 export class OrderComponent {
-  order_services = inject(OrderService)
+  order_services = inject(OrderService);
   statuses = signal(['Pending', 'Processing', 'Completed', 'Cancelled']);
   orders: any[] = []; // This Array Contain All Orders
+  message = {
+    message_text: 'Start Adding Orders',
+    text_color: 'text-yellow-500',
+    bg_color: 'bg-zinc-800',
+  };
 
   submission_status = signal({
     order_status: false,
@@ -41,25 +46,31 @@ export class OrderComponent {
       this.order_status
     ) {
       if (this.form_order_state === 'Create Order') {
-        let order =  {
+        let order = {
           order_name: this.order_name,
           customer_name: this.customer_name,
           total_amount: parseFloat(this.total_amount),
-          order_date:  this.order_date,
-          order_status: this.order_status
-      }
+          order_date: this.order_date,
+          order_status: this.order_status,
+        };
         this.orders.push(order);
 
         // Send Request to Add Order Endpoint
         this.order_services.addOrder(order).subscribe({
           next: (response) => {
-            console.log('Order Added:', response);
+            this.message.message_text = 'Order added successfully';
+            this.message.text_color = 'text-white';
+            this.message.bg_color = 'bg-green-600';
+            setInterval(() => {
+              this.message.message_text = 'Start Adding Order';
+              this.message.text_color = 'text-yellow-500';
+              this.message.bg_color = 'bg-zinc-800';
+            }, 3000);
           },
           error: (err) => {
             console.error('Error Added Order:', err);
-          }
+          },
         });
-
       } else {
         // Find the index of the order that will be updated
         const orderIndex = this.orders.findIndex(
@@ -78,14 +89,23 @@ export class OrderComponent {
           };
 
           // Send Request to Update Order Endpoint with order_id and updated order data
-          this.order_services.updateOrder(this.current_order_id, this.orders[orderIndex]).subscribe({
-            next: (response) => {
-              console.log('Order Updated:', response);
-            },
-            error: (err) => {
-              console.error('Error Updated Order:', err);
-            }
-          });
+          this.order_services
+            .updateOrder(this.current_order_id, this.orders[orderIndex])
+            .subscribe({
+              next: (response) => {
+                this.message.message_text = 'Order updated successfully';
+                this.message.text_color = 'text-white';
+                this.message.bg_color = 'bg-green-600';
+                setInterval(() => {
+                  this.message.message_text = 'Start Adding Order';
+                  this.message.text_color = 'text-yellow-500';
+                  this.message.bg_color = 'bg-zinc-800';
+                }, 3000);
+              },
+              error: (err) => {
+                console.error('Error Updating Order:', err);
+              },
+            });
         }
 
         // Reset form state
@@ -133,15 +153,21 @@ export class OrderComponent {
     console.log(order_id);
     this.order_services.deleteOrder(order_id).subscribe({
       next: (response) => {
-        console.log('Order Deleted:', response);
+        this.message.message_text = 'Order deleted successfully';
+        this.message.text_color = 'text-white';
+        this.message.bg_color = 'bg-green-600';
+        setInterval(() => {
+          this.message.message_text = 'Start Adding Order';
+          this.message.text_color = 'text-yellow-500';
+          this.message.bg_color = 'bg-zinc-800';
+        }, 3000);
       },
       error: (err) => {
         console.error('Error deleting Order:', err);
-      }
+      },
     });
 
     this.orders = this.orders.filter((order) => order.order_id !== order_id);
-
   }
 
   ngOnInit() {

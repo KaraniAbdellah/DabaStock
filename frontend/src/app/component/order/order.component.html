@@ -1,9 +1,10 @@
-<div class="order bg-zinc-900 rounded-lg shadow-md p-6">
+<div class="order bg-zinc-900 rounded-lg shadow-md p-6 relative">
     <h2 class="text-lg font-semibold text-amber-400 mb-5 block md:hidden">
       Order Management
     </h2>
-  
-    <form class="space-y-4">
+    
+  <p class="text-center text-lg font-semibold {{message.bg_color}} p-3 {{message.text_color}} border-2 border-zinc-900 absolute top-0 left-0 rounded-tl-md">{{message.message_text}}</p>
+    <form class="space-y-4 mt-12">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="space-y-2">
           <label
