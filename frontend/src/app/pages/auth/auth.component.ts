@@ -29,7 +29,6 @@ export class AuthComponent {
     this.isLogin = !this.isLogin;
   }
   SignInUserOrLogin(event: Event) {
-    console.log(this.isLogin);
     event.preventDefault();
     if (this.user_email == "" || this.user_password == "") {
       if (!this.isLogin && this.user_name == "") {
@@ -48,7 +47,6 @@ export class AuthComponent {
       user_name: this.user_name,
       user_password: this.user_password,
     };
-    console.log(new_user);
 
     if (!this.isLogin) {
       this.auth_service.AddUser_SignIn(new_user).subscribe({

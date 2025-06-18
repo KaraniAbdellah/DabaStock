@@ -1,16 +1,23 @@
 import { Component } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-aside',
-  imports: [RouterModule, MatIconModule],
-  templateUrl: './aside.component.html',
+  imports: [RouterModule, MatIconModule, CommonModule],
+templateUrl: './aside.component.html',
   styleUrl: './aside.component.css',
   providers: [Router]
 })
 export class AsideComponent {
   constructor(private router: Router) {}
+
+  isActive(router: string): boolean {
+    return this.router.url == `/${router}`;
+  }
+
   navigateToAnotherCom(path: string) {
     this.router.navigate([`/${path}`]);
   }
