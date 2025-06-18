@@ -16,6 +16,11 @@ import { SupplierService } from '../../services/suppliers/supplier.service';
 export class StockComponent {
   productService = inject(StockService);
   supplierService = inject(SupplierService);
+  message = {
+    message_text: "Start Adding Product",
+    text_color: "text-yellow-500",
+    bg_color: "bg-zinc-800"
+  }
 
   suppliers: any = [];
   
@@ -53,10 +58,16 @@ export class StockComponent {
           supplier_name: this.supplier_name
         }
         this.products.push(product);
-        console.log(product);
         this.productService.addProduct(product).subscribe({
           next: (response) => {
-            console.log('Product added:', response);
+            this.message.message_text = "Product added successfully";
+            this.message.text_color = "text-white";
+            this.message.bg_color = "bg-green-600";
+            setInterval(() => {
+              this.message.message_text = "Start Adding Product";
+              this.message.text_color = "text-yellow-500";
+              this.message.bg_color = "bg-zinc-800"
+            }, 3000);
           },
           error: (err) => {
             console.error('Error adding product:', err);
@@ -87,7 +98,14 @@ export class StockComponent {
         // Send Request to Update Product Endpoint
         this.productService.updateProduct(this.current_product_id, updatedProduct).subscribe({
           next: (response) => {
-            console.log('Product Updated:', response);
+            this.message.message_text = "Product updated successfully";
+            this.message.text_color = "text-white";
+            this.message.bg_color = "bg-green-600";
+            setInterval(() => {
+              this.message.message_text = "Start Adding Product";
+              this.message.text_color = "text-yellow-500";
+              this.message.bg_color = "bg-zinc-800"
+            }, 3000);
           },
           error: (err) => {
             console.error('Error updated product:', err);
@@ -135,6 +153,14 @@ export class StockComponent {
     console.log(product_id);
     this.productService.deleteProduct(product_id).subscribe({
       next: (response) => {
+      this.message.message_text = "Product deleted successfully";
+      this.message.text_color = "text-white";
+      this.message.bg_color = "bg-green-600";
+      setInterval(() => {
+        this.message.message_text = "Start Adding Product";
+        this.message.text_color = "text-yellow-500";
+        this.message.bg_color = "bg-zinc-800"
+      }, 3000);
         console.log('Product Deleted:', response);
       },
       error: (err) => {
