@@ -10,7 +10,7 @@ import { SupplierService } from '../../services/suppliers/supplier.service';
   imports: [RouterModule, CommonModule, FormsModule, MatIconModule],
   templateUrl: './supplier.component.html',
   styleUrl: './supplier.component.css',
-  providers: [SupplierService]
+  providers: [SupplierService],
 })
 export class SupplierComponent {
   supplier_service = inject(SupplierService);
@@ -20,6 +20,11 @@ export class SupplierComponent {
     text: 'All Fields Required',
     color: 'red',
   });
+  message = {
+    message_text: 'Start Adding Suppliers',
+    text_color: 'text-yellow-500',
+    bg_color: 'bg-zinc-800',
+  };
 
   form_state: string = 'Create Supplier';
   supplier_name: string = '';
@@ -45,17 +50,28 @@ export class SupplierComponent {
           supplier_email: this.supplier_email,
           phone_number: this.phone_number,
           supplier_address: this.supplier_address,
-        }
+        };
         this.suppliers.push(supplier);
+
         // Send Request to Add Endpoint
         this.supplier_service.postSupplier(supplier).subscribe({
           next: (response) => {
-            console.log('Supplier added:', response);
+            this.message.message_text = 'Supplier added successfully';
+            this.message.text_color = 'text-white';
+            this.message.bg_color = 'bg-green-600';
+            setTimeout(() => {
+              this.message.message_text = 'Start Adding Suppliers';
+              this.message.text_color = 'text-yellow-500';
+              this.message.bg_color = 'bg-zinc-800';
+            }, 3000);
           },
           error: (err) => {
             console.error('Error adding supplier:', err);
-          }
+          },
         });
+        setTimeout(() => {
+          this.getSupplier();
+        }, 2000);
       } else {
         // Update existing supplier
         const supplierIndex = this.suppliers.findIndex(
@@ -75,14 +91,23 @@ export class SupplierComponent {
 
         // Send Request to Update Endpoint
         let updateSupplier = this.suppliers[supplierIndex];
-        this.supplier_service.updateSupplier(updateSupplier, this.current_supplier_id).subscribe({
-          next: (response) => {
-            console.log('Supplier Updated:', response);
-          },
-          error: (err) => {
-            console.error('Error Updating Supplier:', err);
-          }
-        });
+        this.supplier_service
+          .updateSupplier(updateSupplier, this.current_supplier_id)
+          .subscribe({
+            next: (response) => {
+              this.message.message_text = 'Supplier updated successfully';
+              this.message.text_color = 'text-white';
+              this.message.bg_color = 'bg-green-600';
+              setTimeout(() => {
+                this.message.message_text = 'Start Adding Suppliers';
+                this.message.text_color = 'text-yellow-500';
+                this.message.bg_color = 'bg-zinc-800';
+              }, 3000);
+            },
+            error: (err) => {
+              console.error('Error Updating Supplier:', err);
+            },
+          });
         // Reset form state
         this.form_state = 'Create Supplier';
         this.current_supplier_id = null;
@@ -131,21 +156,37 @@ export class SupplierComponent {
     this.suppliers = this.suppliers.filter(
       (sup) => sup.supplier_id !== supplier_id
     );
+    console.log(supplier_id);
     // Send Request to Delete Endpoint
     this.supplier_service.deleteSupplier(supplier_id).subscribe({
       next: (response) => {
-        console.log('Supplier Delete:', response);
+        this.message.message_text = 'Supplier deleted successfully';
+        this.message.text_color = 'text-white';
+        this.message.bg_color = 'bg-green-600';
+        setTimeout(() => {
+          this.message.message_text = 'Start Adding Suppliers';
+          this.message.text_color = 'text-yellow-500';
+          this.message.bg_color = 'bg-zinc-800';
+        }, 3000);
       },
       error: (err) => {
         console.error('Error Deleting Supplier:', err);
+      },
+    });
+  }
+
+  getSupplier() {
+    this.supplier_service.getSupplier().subscribe((data: any) => {
+      this.suppliers = data;
+      if (this.suppliers.length == 0) {
+        this.message.message_text = 'No suppliers found';
+        this.message.text_color = 'text-blue-500';
+        this.message.bg_color = 'bg-zinc-800';
       }
     });
   }
 
-
   ngOnInit() {
-    this.supplier_service.getSupplier().subscribe((data: any) => {
-      this.suppliers = data;
-    });
+    this.getSupplier();
   }
 }

@@ -18,7 +18,7 @@ export class OrderComponent {
   statuses = signal(['Pending', 'Processing', 'Completed', 'Cancelled']);
   orders: any[] = []; // This Array Contain All Orders
   message = {
-    message_text: 'Start Adding Orders',
+    message_text: 'Start Adding Orderss',
     text_color: 'text-yellow-500',
     bg_color: 'bg-zinc-800',
   };
@@ -61,8 +61,8 @@ export class OrderComponent {
             this.message.message_text = 'Order added successfully';
             this.message.text_color = 'text-white';
             this.message.bg_color = 'bg-green-600';
-            setInterval(() => {
-              this.message.message_text = 'Start Adding Order';
+            setTimeout(() => {
+              this.message.message_text = 'Start Adding Orders';
               this.message.text_color = 'text-yellow-500';
               this.message.bg_color = 'bg-zinc-800';
             }, 3000);
@@ -71,6 +71,9 @@ export class OrderComponent {
             console.error('Error Added Order:', err);
           },
         });
+        setTimeout(() => {
+          this.getOrders();
+        }, 2000);
       } else {
         // Find the index of the order that will be updated
         const orderIndex = this.orders.findIndex(
@@ -96,8 +99,8 @@ export class OrderComponent {
                 this.message.message_text = 'Order updated successfully';
                 this.message.text_color = 'text-white';
                 this.message.bg_color = 'bg-green-600';
-                setInterval(() => {
-                  this.message.message_text = 'Start Adding Order';
+                setTimeout(() => {
+                  this.message.message_text = 'Start Adding Orders';
                   this.message.text_color = 'text-yellow-500';
                   this.message.bg_color = 'bg-zinc-800';
                 }, 3000);
@@ -156,8 +159,8 @@ export class OrderComponent {
         this.message.message_text = 'Order deleted successfully';
         this.message.text_color = 'text-white';
         this.message.bg_color = 'bg-green-600';
-        setInterval(() => {
-          this.message.message_text = 'Start Adding Order';
+        setTimeout(() => {
+          this.message.message_text = 'Start Adding Orders';
           this.message.text_color = 'text-yellow-500';
           this.message.bg_color = 'bg-zinc-800';
         }, 3000);
@@ -166,14 +169,21 @@ export class OrderComponent {
         console.error('Error deleting Order:', err);
       },
     });
-
     this.orders = this.orders.filter((order) => order.order_id !== order_id);
   }
 
-  ngOnInit() {
-    this.order_services.test();
+  getOrders() {
     this.order_services.getOrders().subscribe((data: any) => {
       this.orders = data;
+      if (this.orders.length == 0) {
+        this.message.message_text = 'No orders found';
+        this.message.text_color = 'text-blue-500';
+        this.message.bg_color = 'bg-zinc-800';
+      }
     });
+  }
+
+  ngOnInit() {
+    this.getOrders();
   }
 }

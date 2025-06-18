@@ -8,9 +8,6 @@ export class OrderService {
 
   private url = "http://127.0.0.1:8080/order";  
   constructor(private http: HttpClient) { }
-  test() {
-    console.log("Hello World");
-  }
 
   getOrders() {
     return this.http.get(`${this.url}/get_orders`);

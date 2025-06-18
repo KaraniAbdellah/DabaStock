@@ -72,7 +72,7 @@ export class AuthComponent {
           document.cookie = `user_name=${user_name}; SameSite=None; Secure; max-age=31536000`;
           document.cookie = `user_id_iden=${user_id_iden}; SameSite=None; Secure; max-age=31536000`;
           this.router.navigate(["/loading"]);
-          setInterval(() => {
+          setTimeout(() => {
             this.router.navigate(["/"]);
           }, 5000);
         },

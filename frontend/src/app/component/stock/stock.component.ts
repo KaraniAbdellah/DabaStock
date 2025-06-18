@@ -17,7 +17,7 @@ export class StockComponent {
   productService = inject(StockService);
   supplierService = inject(SupplierService);
   message = {
-    message_text: "Start Adding Product",
+    message_text: "Start Adding Products",
     text_color: "text-yellow-500",
     bg_color: "bg-zinc-800"
   }
@@ -63,16 +63,19 @@ export class StockComponent {
             this.message.message_text = "Product added successfully";
             this.message.text_color = "text-white";
             this.message.bg_color = "bg-green-600";
-            setInterval(() => {
-              this.message.message_text = "Start Adding Product";
+            setTimeout(() => {
+              this.message.message_text = "Start Adding Products";
               this.message.text_color = "text-yellow-500";
               this.message.bg_color = "bg-zinc-800"
             }, 3000);
           },
           error: (err) => {
-            console.error('Error adding product:', err);
+            console.error('Error adding products:', err);
           }
         });
+        setTimeout(() => {
+          this.getProducts();
+        }, 2000);
       } else {
         // Find the index of the product that will be updated
         const productIndex = this.products.findIndex(
@@ -101,8 +104,8 @@ export class StockComponent {
             this.message.message_text = "Product updated successfully";
             this.message.text_color = "text-white";
             this.message.bg_color = "bg-green-600";
-            setInterval(() => {
-              this.message.message_text = "Start Adding Product";
+            setTimeout(() => {
+              this.message.message_text = "Start Adding Products";
               this.message.text_color = "text-yellow-500";
               this.message.bg_color = "bg-zinc-800"
             }, 3000);
@@ -156,8 +159,8 @@ export class StockComponent {
       this.message.message_text = "Product deleted successfully";
       this.message.text_color = "text-white";
       this.message.bg_color = "bg-green-600";
-      setInterval(() => {
-        this.message.message_text = "Start Adding Product";
+      setTimeout(() => {
+        this.message.message_text = "Start Adding Products";
         this.message.text_color = "text-yellow-500";
         this.message.bg_color = "bg-zinc-800"
       }, 3000);
@@ -173,13 +176,22 @@ export class StockComponent {
     );
   }
 
-  ngOnInit() {
+  getProducts() {
     this.productService.getAllProducts().subscribe((data: any) => {
       this.products = data;
+      if (this.products.length == 0) {
+        this.message.message_text = 'No products found';
+        this.message.text_color = 'text-blue-500';
+        this.message.bg_color = 'bg-zinc-800';
+      }
     });
+  }
+
+  
+  ngOnInit() {
+    this.getProducts();
     // Get The Suppliers
     this.supplierService.getSupplier().subscribe((data: any) => {
-      console.log(data);
       data.forEach((element: any) => {
         this.suppliers.push({name: element.supplier_name});
       });
