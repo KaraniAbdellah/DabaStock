@@ -1,14 +1,19 @@
 import { Component } from '@angular/core';
-import {RouterModule} from "@angular/router";
+import { RouterModule, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-aside',
   imports: [RouterModule, MatIconModule],
-templateUrl: './aside.component.html',
-  styleUrl: './aside.component.css'
+  templateUrl: './aside.component.html',
+  styleUrl: './aside.component.css',
+  providers: [Router]
 })
 export class AsideComponent {
+  constructor(private router: Router) {}
+  navigateToAnotherCom(path: string) {
+    this.router.navigate([`/${path}`]);
+  }
 
   // Log out
   logout() {
