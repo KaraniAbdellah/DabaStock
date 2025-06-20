@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-loading',
-  imports: [RouterModule],
   templateUrl: './loading.component.html',
-  styleUrl: './loading.component.css'
+  styleUrls: ['./loading.component.css'],
 })
-export class LoadingComponent {
+export class LoadingComponent implements OnInit {
+  constructor(private router: Router) {}
 
+  ngOnInit() {
+  }
 }

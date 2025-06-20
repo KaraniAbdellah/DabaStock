@@ -20,6 +20,7 @@ export class AppComponent {
       this.auth_service.getUser(user_id_iden).subscribe({
         next: (response: any) => {
           console.log("This User Already Login");
+          this.router.navigate(["/dashboard"]);
         },
         error: (err) => {
           this.router.navigate(["/auth"]);
