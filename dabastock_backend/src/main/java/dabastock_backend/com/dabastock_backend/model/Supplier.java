@@ -27,19 +27,29 @@ public class Supplier {
     @Column(name = "supplier_address")
     private String supplier_address;
 
+    @Column(name="user_id_iden")
+    private String user_id_iden;
+
     public Supplier() {}
 
 
-    public Supplier(int supplier_id, String supplier_name, String contact_person, String supplier_email, String phone_number, String supplier_address) {
+    public Supplier(int supplier_id, String user_id_iden, String supplier_name, String contact_person, String supplier_email, String phone_number, String supplier_address) {
         this.supplier_id = supplier_id;
         this.supplier_name = supplier_name;
         this.contact_person = contact_person;
         this.supplier_email = supplier_email;
         this.phone_number = phone_number;
         this.supplier_address = supplier_address;
+        this.user_id_iden = user_id_iden;
     }
 
+    public String getUser_id_iden() {
+        return user_id_iden;
+    }
 
+    public void setUser_id_iden(String user_id_iden) {
+        this.user_id_iden = user_id_iden;
+    }
     public int getSupplier_id() {
         return supplier_id;
     }

@@ -26,13 +26,26 @@ public class Order {
     @Column(name="order_status")
     private String order_status;
 
-    public Order(int order_id, String order_name, String customer_name, double total_amount, String order_date, String order_status) {
+    @Column(name="user_id_iden")
+    private String user_id_iden;
+
+
+    public Order(int order_id, String user_id_iden, String order_name, String customer_name, double total_amount, String order_date, String order_status) {
         this.order_id = order_id;
         this.order_name = order_name;
         this.customer_name = customer_name;
         this.total_amount = total_amount;
         this.order_date = order_date;
         this.order_status = order_status;
+        this.user_id_iden = user_id_iden;
+    }
+
+    public String getUser_id_iden() {
+        return user_id_iden;
+    }
+
+    public void setUser_id_iden(String user_id_iden) {
+        this.user_id_iden = user_id_iden;
     }
 
     public Order() {

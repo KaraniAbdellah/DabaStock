@@ -17,9 +17,15 @@ public class OrderController {
     @Autowired
     private OrderService order_service;
 
-    @GetMapping("/get_orders")
-    public List<Order> getOrders() {
-        return order_service.getOrders();
+    @GetMapping("/get_orders/{user_id_iden}")
+    public List<Order> getOrders(@PathVariable String user_id_iden) {
+        List<Order> orders = order_service.getOrders();
+        for(Order order: orders) {
+            if (!order.getUser_id_iden().equals(user_id_iden)) {
+                orders.remove(order);
+            }
+        }
+        return orders;
     }
 
     @PostMapping("/post_order")

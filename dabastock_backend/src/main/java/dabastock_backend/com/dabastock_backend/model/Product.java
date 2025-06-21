@@ -28,13 +28,23 @@ public class Product {
     @Column(name = "supplier_name")
     private String supplier_name;
 
+    @Column(name="user_id_iden")
+    private String user_id_iden;
+
+
     public String getProduct_description() {
         return this.product_description;
     }
     public int getProduct_id() {
         return this.product_id;
     }
+    public String getUser_id_iden() {
+        return user_id_iden;
+    }
 
+    public void setUser_id_iden(String user_id_iden) {
+        this.user_id_iden = user_id_iden;
+    }
     public void setProduct_description(String product_description) {
         this.product_description = product_description;
     }
@@ -77,12 +87,13 @@ public class Product {
         this.supplier_name = supplier_name;
     }
 
-    public Product(String product_name, String product_description, int product_quantity, double product_price, String supplier_name) {
+    public Product(String product_name, String user_id_iden, String product_description, int product_quantity, double product_price, String supplier_name) {
         this.product_name = product_name;
         this.product_description = product_description;
         this.product_quantity = product_quantity;
         this.product_price = product_price;
         this.supplier_name = supplier_name;
+        this.user_id_iden = user_id_iden;
     }
     public Product() {
 
