@@ -1,6 +1,7 @@
 package dabastock_backend.com.dabastock_backend.controllers;
 
 
+import dabastock_backend.com.dabastock_backend.model.Order;
 import dabastock_backend.com.dabastock_backend.model.Product;
 import dabastock_backend.com.dabastock_backend.services.ProductServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +20,15 @@ public class ProductController {
     @Autowired
     ProductServices product_service;
 
-    @GetMapping("/get_products")
-    public List<Product> getAllProduct() {
-        System.out.println("Getting Product End Point");
-        return product_service.getAllProducts();
+    @GetMapping("/get_products/{user_id_iden}")
+    public List<Product> getAllProduct(@PathVariable String user_id_iden) {
+        List<Product> products = product_service.getAllProducts();
+        for(Product product: products) {
+            if (!product.getUser_id_iden().equals(user_id_iden)) {
+                products.remove(product);
+            }
+        }
+        return products;
     }
 
     @PostMapping ("/add_product")

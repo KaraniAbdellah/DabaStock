@@ -1,5 +1,6 @@
 package dabastock_backend.com.dabastock_backend.controllers;
 
+import dabastock_backend.com.dabastock_backend.model.Product;
 import dabastock_backend.com.dabastock_backend.model.Supplier;
 import dabastock_backend.com.dabastock_backend.services.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,15 @@ public class SupplierController {
     @Autowired
     SupplierService supplier_service;
 
-    @GetMapping("/get_supplier")
-    public List<Supplier> getSupplier() {
-        return supplier_service.getSuppliers();
+    @GetMapping("/get_supplier/{user_id_iden}")
+    public List<Supplier> getSupplier(@PathVariable String user_id_iden) {
+        List<Supplier> suppliers = supplier_service.getSuppliers();
+        for(Supplier supplier: suppliers) {
+            if (!supplier.getUser_id_iden().equals(user_id_iden)) {
+                suppliers.remove(supplier);
+            }
+        }
+        return suppliers;
     }
 
     @PostMapping("/post_supplier")
