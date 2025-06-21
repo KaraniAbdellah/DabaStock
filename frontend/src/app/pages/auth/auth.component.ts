@@ -27,6 +27,8 @@ export class AuthComponent {
 
   toggleForm() {
     this.isLogin = !this.isLogin;
+    this.IsEmpty = false;
+    this.IsError = false;
   }
   SignInUserOrLogin(event: Event) {
     event.preventDefault();
