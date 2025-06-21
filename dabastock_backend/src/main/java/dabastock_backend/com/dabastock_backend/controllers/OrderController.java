@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Iterator;
 import java.util.List;
 
 @RestController
@@ -20,13 +21,10 @@ public class OrderController {
     @GetMapping("/get_orders/{user_id_iden}")
     public List<Order> getOrders(@PathVariable String user_id_iden) {
         List<Order> orders = order_service.getOrders();
-        for(Order order: orders) {
-            if (!order.getUser_id_iden().equals(user_id_iden)) {
-                orders.remove(order);
-            }
-        }
+        orders.removeIf(order -> !order.getUser_id_iden().equals(user_id_iden));
         return orders;
     }
+
 
     @PostMapping("/post_order")
     public ResponseEntity<Order> addOrder(@RequestBody Order order) {

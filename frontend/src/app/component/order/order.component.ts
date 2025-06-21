@@ -18,10 +18,12 @@ export class OrderComponent {
   statuses = signal(['Pending', 'Processing', 'Completed', 'Cancelled']);
   orders: any[] = []; // This Array Contain All Orders
   message = {
-    message_text: 'Start Adding Orderss',
+    message_text: 'Start Adding Orders',
     text_color: 'text-yellow-500',
     bg_color: 'bg-zinc-800',
   };
+  user_id_iden: string = `${document.cookie.split('; ').find(c => c?.startsWith('user_id_iden='))?.split('=')[1] || ''}`;
+
 
   submission_status = signal({
     order_status: false,
@@ -52,6 +54,7 @@ export class OrderComponent {
           total_amount: parseFloat(this.total_amount),
           order_date: this.order_date,
           order_status: this.order_status,
+          user_id_iden: this.user_id_iden
         };
         this.orders.push(order);
 
@@ -72,7 +75,7 @@ export class OrderComponent {
           },
         });
         setTimeout(() => {
-          this.getOrders();
+          this.getOrders(this.user_id_iden);
         }, 2000);
       } else {
         // Find the index of the order that will be updated
@@ -89,6 +92,7 @@ export class OrderComponent {
             total_amount: parseFloat(this.total_amount),
             order_date: this.order_date,
             order_status: this.order_status,
+            user_id_iden: this.user_id_iden
           };
 
           // Send Request to Update Order Endpoint with order_id and updated order data
@@ -172,8 +176,8 @@ export class OrderComponent {
     this.orders = this.orders.filter((order) => order.order_id !== order_id);
   }
 
-  getOrders() {
-    this.order_services.getOrders().subscribe((data: any) => {
+  getOrders(user_id_iden: string) {
+    this.order_services.getOrders(user_id_iden).subscribe((data: any) => {
       this.orders = data;
       if (this.orders.length == 0) {
         this.message.message_text = 'No orders found';
@@ -182,8 +186,9 @@ export class OrderComponent {
       }
     });
   }
-
+  
   ngOnInit() {
-    this.getOrders();
+    console.log("We Are In Init");
+    this.getOrders(this.user_id_iden);
   }
 }

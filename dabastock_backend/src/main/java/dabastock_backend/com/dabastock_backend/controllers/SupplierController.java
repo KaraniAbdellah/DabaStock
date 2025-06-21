@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Iterator;
 import java.util.List;
 
 @RestController
@@ -16,17 +17,13 @@ import java.util.List;
 public class SupplierController {
     @Autowired
     SupplierService supplier_service;
-
     @GetMapping("/get_supplier/{user_id_iden}")
     public List<Supplier> getSupplier(@PathVariable String user_id_iden) {
         List<Supplier> suppliers = supplier_service.getSuppliers();
-        for(Supplier supplier: suppliers) {
-            if (!supplier.getUser_id_iden().equals(user_id_iden)) {
-                suppliers.remove(supplier);
-            }
-        }
+        suppliers.removeIf(supplier -> !supplier.getUser_id_iden().equals(user_id_iden));
         return suppliers;
     }
+
 
     @PostMapping("/post_supplier")
     public ResponseEntity<Supplier> postSupplier(@RequestBody Supplier supplier) {

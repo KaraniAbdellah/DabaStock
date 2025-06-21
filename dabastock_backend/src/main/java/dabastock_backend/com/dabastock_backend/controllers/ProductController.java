@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @RestController
@@ -23,11 +24,7 @@ public class ProductController {
     @GetMapping("/get_products/{user_id_iden}")
     public List<Product> getAllProduct(@PathVariable String user_id_iden) {
         List<Product> products = product_service.getAllProducts();
-        for(Product product: products) {
-            if (!product.getUser_id_iden().equals(user_id_iden)) {
-                products.remove(product);
-            }
-        }
+        products.removeIf(product -> !product.getUser_id_iden().equals(user_id_iden));
         return products;
     }
 

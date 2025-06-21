@@ -9,8 +9,9 @@ export class OrderService {
   private url = "http://127.0.0.1:8080/order";  
   constructor(private http: HttpClient) { }
 
-  getOrders() {
-    return this.http.get(`${this.url}/get_orders`);
+  getOrders(user_id_iden: any) {
+    console.log(`${this.url}/get_orders/${user_id_iden}`);
+    return this.http.get(`${this.url}/get_orders/${user_id_iden}`);
   }
 
   deleteOrder(id: any) {

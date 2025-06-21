@@ -20,6 +20,8 @@ export class DashboardComponent {
   product_service = inject(StockService);
   order_service = inject(OrderService);
 
+  user_id_iden: string = `${document.cookie.split('; ').find(c => c?.startsWith('user_id_iden='))?.split('=')[1] || ''}`;
+
   product_number = signal(0)
   supplier_number = signal(0)
   orders_number = signal(0)
@@ -32,7 +34,7 @@ export class DashboardComponent {
     this.product_service.getAllProducts().subscribe((data: any) => {
       this.product_number.update(() => data.length);
     });
-    this.order_service.getOrders().subscribe((data: any) => {
+    this.order_service.getOrders(this.user_id_iden).subscribe((data: any) => {
       this.orders_number.update(() => data.length);
     });
   }
