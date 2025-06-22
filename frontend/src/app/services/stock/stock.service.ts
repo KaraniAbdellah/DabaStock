@@ -12,8 +12,8 @@ export class StockService {
   // Get All Products
   private url = "http://127.0.0.1:8080/product";
 
-  getAllProducts() {
-    return this.http.get(`${this.url}/get_products`);
+  getAllProducts(user_id_iden: string) {
+    return this.http.get(`${this.url}/get_products/${user_id_iden}`);
   }
 
   addProduct(data: any) {

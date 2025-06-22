@@ -28,10 +28,10 @@ export class DashboardComponent {
 
   ngOnInit() {
     // get The Number of Order, Product and Suppliers
-    this.supplier_service.getSupplier().subscribe((data: any) => {
+    this.supplier_service.getSupplier(this.user_id_iden).subscribe((data: any) => {
       this.supplier_number.update(() => data.length);
     });
-    this.product_service.getAllProducts().subscribe((data: any) => {
+    this.product_service.getAllProducts(this.user_id_iden).subscribe((data: any) => {
       this.product_number.update(() => data.length);
     });
     this.order_service.getOrders(this.user_id_iden).subscribe((data: any) => {

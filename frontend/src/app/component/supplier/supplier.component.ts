@@ -33,6 +33,7 @@ export class SupplierComponent {
   phone_number: string = '';
   supplier_address: string = '';
   current_supplier_id: number | null = null;
+  user_id_iden: string = `${document.cookie.split('; ').find(c => c?.startsWith('user_id_iden='))?.split('=')[1] || ''}`;
 
   add_supplier() {
     if (
@@ -50,6 +51,7 @@ export class SupplierComponent {
           supplier_email: this.supplier_email,
           phone_number: this.phone_number,
           supplier_address: this.supplier_address,
+          user_id_iden: this.user_id_iden
         };
         this.suppliers.push(supplier);
 
@@ -70,7 +72,7 @@ export class SupplierComponent {
           },
         });
         setTimeout(() => {
-          this.getSupplier();
+          this.getSupplier(this.user_id_iden);
         }, 2000);
       } else {
         // Update existing supplier
@@ -86,6 +88,7 @@ export class SupplierComponent {
             supplier_email: this.supplier_email,
             phone_number: this.phone_number,
             supplier_address: this.supplier_address,
+            user_id_iden: this.user_id_iden
           };
         }
 
@@ -175,8 +178,8 @@ export class SupplierComponent {
     });
   }
 
-  getSupplier() {
-    this.supplier_service.getSupplier().subscribe((data: any) => {
+  getSupplier(user_id_iden: string) {
+    this.supplier_service.getSupplier(user_id_iden).subscribe((data: any) => {
       this.suppliers = data;
       if (this.suppliers.length == 0) {
         this.message.message_text = 'No suppliers found';
@@ -187,6 +190,6 @@ export class SupplierComponent {
   }
 
   ngOnInit() {
-    this.getSupplier();
+    this.getSupplier(this.user_id_iden);
   }
 }

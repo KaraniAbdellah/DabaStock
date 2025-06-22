@@ -8,8 +8,8 @@ export class SupplierService {
   private url = "http://127.0.0.1:8080/supplier";
   constructor(private http: HttpClient) { }
 
-  getSupplier() {
-    return this.http.get(`${this.url}/get_supplier`);
+  getSupplier(user_id_iden: string) {
+    return this.http.get(`${this.url}/get_supplier/${user_id_iden}`);
   }
 
   postSupplier(data: any) {
