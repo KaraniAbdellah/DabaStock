@@ -10,6 +10,7 @@ import dabastock_backend.com.dabastock_backend.services.SupplierService;
 import dabastock_backend.com.dabastock_backend.services.UserService;
 import org.jasypt.util.text.AES256TextEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,9 @@ public class UserController {
     @Autowired
     SupplierService supplier_serv;
 
+    @Value("${app.secret.key}")
+    private String secret_Key;
+
     @GetMapping("/getUser/{user_id_iden}")
     public ResponseEntity<User> getUser(@PathVariable String user_id_iden) {
         List<User> users = user_sev.getUsers();
@@ -49,7 +53,7 @@ public class UserController {
         for (User user : users) {
             if (user.getUser_id_iden().equals(user_id_iden)) {
                 AES256TextEncryptor textEncryptor = new AES256TextEncryptor();
-                textEncryptor.setPassword("your-secret-password");
+                textEncryptor.setPassword(secret_Key);
                 String encryptedPassword = textEncryptor.encrypt(new_user_info.getUser_password());
                 new_user_info.setUser_password(encryptedPassword);
 

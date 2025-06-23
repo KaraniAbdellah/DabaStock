@@ -4,6 +4,7 @@ import dabastock_backend.com.dabastock_backend.model.User;
 import dabastock_backend.com.dabastock_backend.services.LoginService;
 import org.jasypt.util.text.AES256TextEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,9 @@ public class LoginController {
     @Autowired
     LoginService login_ser;
 
+    @Value("${app.secret.key}")
+    private String secret_Key;
+
     @PostMapping("/getUserByLogin")
     public ResponseEntity<User> GetUserLogin(@RequestBody User user) {
         List<User> users = login_ser.findUser();
@@ -25,7 +29,7 @@ public class LoginController {
         String user_password = user.getUser_password();
 
         AES256TextEncryptor textEncryptor = new AES256TextEncryptor();
-        textEncryptor.setPassword("your-secret-password");
+        textEncryptor.setPassword(secret_Key);
 
         for (User u : users) {
             if (u.getUser_email().equals(user_email)) {

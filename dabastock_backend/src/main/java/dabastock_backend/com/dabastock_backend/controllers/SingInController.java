@@ -24,6 +24,9 @@ public class SingInController {
     @Autowired
     private StringEncryptor encryptor;
 
+    @Value("${app.secret.key}")
+    private String secret_Key;
+
     @PostMapping("/add_user")
     public ResponseEntity<User> addUser(@RequestBody User new_user) {
         // Check Is User Already Exit
@@ -36,7 +39,7 @@ public class SingInController {
 
         // Encrypt the password using Jasypt
         AES256TextEncryptor textEncryptor = new AES256TextEncryptor();
-        textEncryptor.setPassword("your-secret-password");
+        textEncryptor.setPassword(secret_Key);
         String encryptedPassword = textEncryptor.encrypt(new_user.getUser_password());
         new_user.setUser_password(encryptedPassword);
 
