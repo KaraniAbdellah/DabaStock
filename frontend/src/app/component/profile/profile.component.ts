@@ -19,6 +19,10 @@ export class ProfileComponent {
   constructor(private router: Router) {}
   profile_service = inject(ProfileService);
   auth_service = inject(AuthService);
+  message = {
+    color: "",
+    text: ""
+  }
   // Get This Name Auto
 
   user_id_iden: string = `${document.cookie.split('; ').find(c => c?.startsWith('user_id_iden='))?.split('=')[1] || ''}`;
@@ -26,6 +30,7 @@ export class ProfileComponent {
   avatar:string = `https://robohash.org/deo`;
   user_password: String = "john deo";
   user_email: string = "john_deo@gmail.com";
+  
   ngOnInit() {
     this.auth_service.getUser(this.user_id_iden).subscribe({
       next: (response: any) => {
@@ -43,6 +48,19 @@ export class ProfileComponent {
 
 
   EditProfile() {
+    if (this.user_email == "" || this.user_name == "" || this.user_password == "") {
+      this.message = {
+        color: "text-red-600",
+        text: "Please Fill all inputs"
+      }
+      setTimeout(() => {
+        this.message = {
+          color: "",
+          text: ""
+        }
+      }, 2000);
+      return;
+    }
     let new_user: any = {
         user_email: this.user_email,
         user_name: this.user_name,
@@ -50,7 +68,16 @@ export class ProfileComponent {
     }
     this.profile_service.EditProfile(this.user_id_iden, new_user).subscribe({
       next: (response) => {
-        console.log('User Updated Succeffully:', response);
+        this.message = {
+          color: "text-green-600",
+          text: "User Updated Successfully"
+        }
+        setTimeout(() => {
+          this.message = {
+            color: "",
+            text: ""
+          }
+        }, 2000);
       },
       error: (err) => {
         console.error('Error Updating User:', err);
