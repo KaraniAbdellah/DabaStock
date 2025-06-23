@@ -14,5 +14,5 @@
 <img src="project_image/dabastock8.png" />
 
 
-**made with love by <a href="https://www.linkedin.com/in/abdellah-karani-965928294/">**
+**made with love by <a href="https://www.linkedin.com/in/abdellah-karani-965928294/">abdellah karani</a>**
 
