@@ -3,7 +3,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-
+import { environment } from '../../../environments/environment.development';
 
 @Component({
   selector: 'app-assistance',
@@ -26,7 +26,7 @@ export class AssistanceComponent {
   isDisabled: Boolean  = false;
 
   // Request Requirments
-  token: string = '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';
+  token: string = environment.scretKeyAiModel;
   endpoint: string = 'https://models.github.ai/inference';
   model: string = 'openai/gpt-4.1';
 
