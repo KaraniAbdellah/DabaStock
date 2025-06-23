@@ -70,6 +70,18 @@ public class UserController {
                 List<Supplier> suppliers = supplier_serv.getSuppliers();
                 List<Order> orders = order_serv.getOrders();
 
+                // if we delete supplier auto we delete products
+                for (int i = 0; i < suppliers.size(); i++) {
+                    if (suppliers.get(i).getUser_id_iden().equals(user_id_iden)) {
+                        supplier_serv.deleteSupplier(suppliers.get(i).getSupplier_id());
+                    }
+                }
+
+                for (int i = 0; i < orders.size(); i++) {
+                    if (orders.get(i).getUser_id_iden().equals(user_id_iden)) {
+                        order_serv.deleteOrder(orders.get(i).getOrder_id());
+                    }
+                }
 
                 user_sev.deleteUser(user);
                 return new ResponseEntity<User>(user, HttpStatusCode.valueOf(200));
